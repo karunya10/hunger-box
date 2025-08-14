@@ -1,30 +1,34 @@
 import useRestaurants from "../hooks/useRestaurants";
+import { Button } from "@/components/ui/button";
+import RestaurantCard from "@/components/RestaurantCard";
 
 function HomePage() {
   const { restaurants, loading } = useRestaurants("chennai");
-  console.log(restaurants);
   return (
     <>
       <div>HomePage</div>
-      {!loading &&
-        restaurants.map((restaurant) => {
-          return (
-            <>
-              <img src={restaurant.image} />
-              <div>{restaurant.name}</div>
-              <div>{restaurant.rating}</div>
-              <div>
-                {restaurant.cuisines.map((cuisine) => {
-                  return (
-                    <>
-                      <span>{cuisine}</span>
-                    </>
-                  );
-                })}
-              </div>
-            </>
-          );
-        })}
+      {!loading && (
+        <div className="grid grid-cols-5 gap-4">
+          {restaurants.map((restaurant) => {
+            const {
+              externalId: id,
+              image,
+              name,
+              rating,
+              cuisines,
+            } = restaurant;
+            return (
+              <RestaurantCard
+                key={id}
+                image={image}
+                name={name}
+                cuisines={cuisines}
+                rating={rating}
+              />
+            );
+          })}
+        </div>
+      )}
     </>
   );
 }
