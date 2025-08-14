@@ -42,11 +42,7 @@ export const signOutUser = async () => {
 };
 
 export const signUp = async (email, password) => {
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-  }
+  await createUserWithEmailAndPassword(auth, email, password);
 };
 export const login = async (email, password) => {
   try {

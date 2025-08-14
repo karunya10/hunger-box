@@ -5,28 +5,57 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInWithGoogle, signUp, login } from "@/config/firebase";
 import { useState } from "react";
-
 export default function LoginModal({ open, onOpenChange }) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    await login(userName, password);
-    onOpenChange(false);
+    try {
+      await login(userName, password);
+      toast.success("Login Successful", {
+        description: "Welcome back!",
+        duration: 3000,
+      });
+      onOpenChange(false);
+    } catch (error) {
+      toast.error(error.message, {
+        duration: 3000,
+      });
+    }
   };
   const handleLoginWithGoogle = async () => {
-    await signInWithGoogle();
-    onOpenChange(false);
+    try {
+      await signInWithGoogle();
+      onOpenChange(false);
+      toast.success("Login Successful", {
+        description: "Welcome back!",
+        duration: 3000,
+      });
+    } catch (error) {
+      toast.error(error.message, {
+        duration: 3000,
+      });
+    }
   };
 
   const handleSignUp = async () => {
-    await signUp(userName, password);
-    onOpenChange(false);
+    try {
+      await signUp(userName, password);
+      onOpenChange(false);
+      toast.success("SignUp Successful", {
+        description: "Welcome!",
+        duration: 3000,
+      });
+    } catch (error) {
+      toast.error(error.message, {
+        duration: 3000,
+      });
+    }
   };
 
   return (

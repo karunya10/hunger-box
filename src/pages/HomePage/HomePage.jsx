@@ -1,6 +1,6 @@
-import useRestaurants from "../hooks/useRestaurants";
+import useRestaurants from "../../hooks/useRestaurants";
 import { Button } from "@/components/ui/button";
-import RestaurantCard from "@/components/RestaurantCard";
+import RestaurantCard from "@/pages/HomePage/RestaurantCard";
 
 function HomePage() {
   const { restaurants, loading } = useRestaurants("chennai");
