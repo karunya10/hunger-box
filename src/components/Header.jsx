@@ -29,7 +29,12 @@ export default function Header({ onLoginClick }) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
-              <AvatarImage src={avatarUrl} alt="@user" />
+              <AvatarImage
+                src={avatarUrl}
+                alt="@user"
+                referrerPolicy="no-referrer"
+                loading="lazy"
+              />
               <AvatarFallback>
                 <img
                   src="https://github.com/shadcn.png"
