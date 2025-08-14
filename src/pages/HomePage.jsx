@@ -4,19 +4,14 @@ import RestaurantCard from "@/components/RestaurantCard";
 
 function HomePage() {
   const { restaurants, loading } = useRestaurants("chennai");
+
   return (
     <>
       <div>HomePage</div>
       {!loading && (
         <div className="grid grid-cols-5 gap-4">
           {restaurants.map((restaurant) => {
-            const {
-              externalId: id,
-              image,
-              name,
-              rating,
-              cuisines,
-            } = restaurant;
+            const { id, image, name, rating, cuisines } = restaurant;
             return (
               <RestaurantCard
                 key={id}

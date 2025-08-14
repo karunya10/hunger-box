@@ -1,6 +1,20 @@
+import { useMemo } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOutUser } from "@/config/firebase";
+import { auth } from "../config/firebase";
 
-export default function Header() {
+export default function Header({ onLoginClick }) {
+  const [user] = useAuthState(auth);
+  const avatarUrl = useMemo(() => user?.photoURL ?? "", [user?.photoURL]);
+
   return (
     <header className="w-full px-4 py-2 border-b flex items-center justify-between">
       <div className="flex-1">
@@ -12,10 +26,34 @@ export default function Header() {
       </div>
 
       <div className="flex-1 flex justify-end">
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@user" />
-          <AvatarFallback>FD</AvatarFallback>
-        </Avatar>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar className="cursor-pointer">
+              <AvatarImage src={avatarUrl} alt="@user" />
+              <AvatarFallback>
+                <img
+                  src="https://github.com/shadcn.png"
+                  alt="fallback avatar"
+                />
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48">
+            {user === null ? (
+              <DropdownMenuItem onClick={onLoginClick}>
+                Sign-in
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem onClick={signOutUser}>
+                Sign-out
+              </DropdownMenuItem>
+            )}
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Address Book</DropdownMenuItem>
+            <DropdownMenuItem>Wallet</DropdownMenuItem>
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
