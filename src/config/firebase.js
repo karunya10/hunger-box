@@ -4,6 +4,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
@@ -36,5 +38,20 @@ export const signOutUser = async () => {
     await signOut(auth);
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const signUp = async (email, password) => {
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    console.error(err);
+  }
+};
+export const login = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    console.log(err);
   }
 };
