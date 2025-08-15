@@ -1,11 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SearchInput from "./SearchInput";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { RestaurantContext } from "../../context/RestaurantContext";
+import { LocationsContext } from "../../context/LocationContext";
 
-function FilterBar({ restaurants, setFilteredRestaurants, location }) {
+function FilterBar() {
+  const { restaurants, setFilteredRestaurants } = useContext(RestaurantContext);
+  const { selectedLocation: location } = useContext(LocationsContext);
+
   const [filters, setFilters] = useState({
     search: "",
     rating: null,

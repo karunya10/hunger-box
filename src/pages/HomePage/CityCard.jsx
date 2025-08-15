@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { LocationsContext } from "../../context/locationContext";
 
 const images = {
   chennai: "/images/chennai.png",
   delhi: "/images/delhi.png",
   bengaluru: "/images/bengaluru.png",
 };
-function CityCard({ city, onSelectLocation, selectedLocation }) {
+function CityCard({ city }) {
+  const { selectedLocation, setSelectedLocation } =
+    useContext(LocationsContext);
+
   return (
     <Card
       className={`relative overflow-hidden w-[300px] h-[200px] rounded-xl shadow-md cursor-pointer ${
@@ -15,7 +19,7 @@ function CityCard({ city, onSelectLocation, selectedLocation }) {
           : ""
       }`}
       onClick={() => {
-        onSelectLocation(city);
+        setSelectedLocation(city);
       }}
     >
       <img

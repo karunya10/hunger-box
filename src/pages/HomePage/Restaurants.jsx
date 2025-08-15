@@ -1,23 +1,22 @@
-import { useState } from "react";
-import useRestaurants from "@/hooks/useRestaurants";
+import { useContext } from "react";
 import RestaurantCard from "./RestaurantCard";
 import FilterBar from "./FilterBar";
+import { RestaurantContext } from "../../context/RestaurantContext";
 
-function Restaurants({ location }) {
-  const { restaurants, loading } = useRestaurants(location);
-  const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants);
+function Restaurants() {
+  const {
+    restaurants,
+    filteredRestaurants,
+    loadingRestaurants: loading,
+  } = useContext(RestaurantContext);
 
   return (
     <div>
-      <FilterBar
-        restaurants={restaurants}
-        setFilteredRestaurants={setFilteredRestaurants}
-        location={location}
-      />
+      <FilterBar />
       <>
         {!loading && (
           <div className="flex-cols">
-            <h2 className="text-center my-10">Restaurants in {location}</h2>
+            <h2 className="text-center my-10">Restaurants in city</h2>
             <div className="grid grid-cols-4 gap-6">
               {(filteredRestaurants.length == 0
                 ? restaurants

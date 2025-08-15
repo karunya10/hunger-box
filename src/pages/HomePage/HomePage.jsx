@@ -1,22 +1,15 @@
-import useLocations from "@/hooks/useLocations";
-import { Button } from "@/components/ui/button";
-import RestaurantCard from "@/pages/HomePage/RestaurantCard";
 import Locations from "./Locations";
 import Restaurants from "./Restaurants";
-import { useState } from "react";
+import { useContext } from "react";
+import { LocationsContext } from "../../context/locationContext";
 
 function HomePage() {
-  const { locations, loading: locationsLoading } = useLocations();
-  const [selectedLocation, setSelectedLocation] = useState("chennai");
+  const { locationsLoading } = useContext(LocationsContext);
   return (
     <>
       <main className="m-20">
-        <Locations
-          locations={locations}
-          selectedLocation={selectedLocation}
-          onSelectLocation={setSelectedLocation}
-        />
-        {!locationsLoading && <Restaurants location={selectedLocation} />}
+        <Locations />
+        {!locationsLoading && <Restaurants />}
       </main>
     </>
   );

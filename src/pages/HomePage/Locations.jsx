@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import CityCard from "./CityCard";
+import { LocationsContext } from "../../context/locationContext";
 
-function Locations({ locations, onSelectLocation, selectedLocation }) {
+function Locations() {
+  const { locations } = useContext(LocationsContext);
   return (
     <>
       <div className="flex flex-col items-center my-10">
@@ -10,13 +12,7 @@ function Locations({ locations, onSelectLocation, selectedLocation }) {
         </h2>
         <div className="flex justify-center gap-5">
           {locations.map((city) => {
-            return (
-              <CityCard
-                city={city}
-                onSelectLocation={onSelectLocation}
-                selectedLocation={selectedLocation}
-              />
-            );
+            return <CityCard city={city} />;
           })}
         </div>
       </div>
