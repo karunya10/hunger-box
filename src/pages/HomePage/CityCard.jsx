@@ -1,7 +1,11 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-const IMG_URL = "/images/chennai.jpg";
+const images = {
+  chennai: "/images/chennai.png",
+  delhi: "/images/delhi.png",
+  bengaluru: "/images/bengaluru.png",
+};
 function CityCard({ city, onSelectLocation, selectedLocation }) {
   return (
     <Card
@@ -15,7 +19,7 @@ function CityCard({ city, onSelectLocation, selectedLocation }) {
       }}
     >
       <img
-        src={IMG_URL}
+        src={images[city]}
         alt={city}
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
