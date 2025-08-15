@@ -6,7 +6,6 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_DATABASE_URL;
 
 function useRestaurants(city) {
-  //   const [user] = useAuthState(auth);
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,8 +13,6 @@ function useRestaurants(city) {
   const fetchRestaurants = async () => {
     setLoading(true);
     try {
-      //   const token = await user.getIdToken();
-
       const response = await axios.get(`${API_URL}/locations/${city}.json`);
       if (response.status !== 200) {
         throw new Error("Failed to Fetch Restaurants");
@@ -43,7 +40,7 @@ function useRestaurants(city) {
 
   useEffect(() => {
     fetchRestaurants();
-  }, []);
+  }, [city]);
 
   return { restaurants, loading, error };
 }

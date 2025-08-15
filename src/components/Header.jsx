@@ -16,13 +16,12 @@ export default function Header({ onLoginClick }) {
   const avatarUrl = useMemo(() => user?.photoURL ?? "", [user?.photoURL]);
 
   return (
-    <header className="w-full px-4 py-2 border-b flex items-center justify-between">
+    <header
+      className="w-full px-4 py-5 border-b flex items-center justify-between"
+      style={{ backgroundColor: "#FF6B5E" }}
+    >
       <div className="flex-1">
-        <span className="text-xl font-bold">🍔</span>
-      </div>
-
-      <div className="flex-1 text-center">
-        <h1 className="text-lg font-medium">Platr</h1>
+        <h1 className="text-lg font-medium">Hunger Box</h1>
       </div>
 
       <div className="flex-1 flex justify-end">

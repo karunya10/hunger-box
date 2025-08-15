@@ -1,29 +1,23 @@
-import useRestaurants from "../../hooks/useRestaurants";
+import useLocations from "@/hooks/useLocations";
 import { Button } from "@/components/ui/button";
 import RestaurantCard from "@/pages/HomePage/RestaurantCard";
+import Locations from "./Locations";
+import Restaurants from "./Restaurants";
+import { useState } from "react";
 
 function HomePage() {
-  const { restaurants, loading } = useRestaurants("chennai");
-
+  const { locations, loading: locationsLoading } = useLocations();
+  const [selectedLocation, setSelectedLocation] = useState("chennai");
   return (
     <>
-      <div>HomePage</div>
-      {!loading && (
-        <div className="grid grid-cols-5 gap-4">
-          {restaurants.map((restaurant) => {
-            const { id, image, name, rating, cuisines } = restaurant;
-            return (
-              <RestaurantCard
-                key={id}
-                image={image}
-                name={name}
-                cuisines={cuisines}
-                rating={rating}
-              />
-            );
-          })}
-        </div>
-      )}
+      <main className="m-20">
+        <Locations
+          locations={locations}
+          selectedLocation={selectedLocation}
+          onSelectLocation={setSelectedLocation}
+        />
+        {!locationsLoading && <Restaurants location={selectedLocation} />}
+      </main>
     </>
   );
 }
