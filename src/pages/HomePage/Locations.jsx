@@ -12,7 +12,7 @@ function Locations() {
         </h2>
         <div className="flex justify-center gap-5">
           {locations.map((city) => {
-            return <CityCard city={city} />;
+            return <CityCard city={city} key={city} />;
           })}
         </div>
       </div>
