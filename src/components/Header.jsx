@@ -10,10 +10,16 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOutUser } from "@/config/firebase";
 import { auth } from "../config/firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({ onLoginClick }) {
   const [user] = useAuthState(auth);
   const avatarUrl = useMemo(() => user?.photoURL ?? "", [user?.photoURL]);
+
+  const navigate = useNavigate();
+
+
+
 
   return (
     <header
@@ -21,7 +27,11 @@ export default function Header({ onLoginClick }) {
       style={{ backgroundColor: "#FF6B5E" }}
     >
       <div className="flex-1">
-        <h1 className="text-lg font-medium">Hunger Box</h1>
+        <img
+          src="/logo.svg"
+          alt="Hunger-Box"
+          className="h-10 w-auto object-contain"
+        />
       </div>
 
       <div className="flex-1 flex justify-end">
@@ -53,7 +63,7 @@ export default function Header({ onLoginClick }) {
               </DropdownMenuItem>
             )}
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Address Book</DropdownMenuItem>
+            <DropdownMenuItem onClick={()=>navigate("/address")}>Address Book</DropdownMenuItem>
             <DropdownMenuItem>Wallet</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
           </DropdownMenuContent>

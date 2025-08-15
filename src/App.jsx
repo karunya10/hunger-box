@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import MenuPage from "./pages/MenuPage";
 import CheckOutPage from "./pages/CheckOutPage";
+import AddressBookPage from "./pages/AddressBookPage";
 import Header from "./components/Header";
 import LoginModal from "./pages/HomePage/LoginModal";
 import { useState } from "react";
@@ -26,6 +27,7 @@ function App() {
             </LocationsProvider>
           }
         />
+        <Route path="/address" element={<AddressBookPage />} />
         <Route path="/restaurant/:restaurantId" element={<MenuPage />} />
         <Route path="/checkout" element={<CheckOutPage />} />
       </Routes>
