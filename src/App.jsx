@@ -18,24 +18,22 @@ function App() {
     <>
       <Header onLoginClick={() => setShowLoginModal(true)} />
       <LoginModal open={showLoginModal} onOpenChange={setShowLoginModal} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <LocationsProvider>
-              <RestaurantProvider>
-                <HomePage />
-              </RestaurantProvider>
-            </LocationsProvider>
-          }
-        />
-        <Route path="/address" element={<AddressBookPage />} />
-        <Route path="/address/new" element={<AddressForm />} />
-        <Route path="/address/edit/:addressId" element={<EditAddressForm />} />
+      <LocationsProvider>
+        <RestaurantProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/address" element={<AddressBookPage />} />
+            <Route path="/address/new" element={<AddressForm />} />
+            <Route
+              path="/address/edit/:addressId"
+              element={<EditAddressForm />}
+            />
 
-        <Route path="/restaurant/:restaurantId" element={<MenuPage />} />
-        <Route path="/checkout" element={<CheckOutPage />} />
-      </Routes>
+            <Route path="/menus/:city/:restaurantId" element={<MenuPage />} />
+            <Route path="/checkout" element={<CheckOutPage />} />
+          </Routes>
+        </RestaurantProvider>
+      </LocationsProvider>
       <Toaster position="top-center" richColors />
     </>
   );

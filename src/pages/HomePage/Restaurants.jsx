@@ -30,6 +30,7 @@ function Restaurants() {
                     name={name}
                     cuisines={cuisines}
                     rating={rating}
+                    id={id}
                   />
                 );
               })}

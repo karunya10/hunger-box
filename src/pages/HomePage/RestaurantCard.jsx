@@ -1,8 +1,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { LocationsContext } from "@/context/LocationContext";
+import { RestaurantContext } from "@/context/RestaurantContext";
 
-export default function RestaurantCard({ image, name, cuisines, rating }) {
+export default function RestaurantCard({ image, name, cuisines, rating, id }) {
+  const navigate = useNavigate();
+  const { selectedLocation: city } = useContext(LocationsContext);
+
   return (
-    <Card className="w-full sm:w-[350px] shadow-md hover:shadow-xl transition-shadow py-0 pb-5">
+    <Card
+      className="w-full sm:w-[350px] shadow-md hover:shadow-xl transition-shadow py-0 pb-5"
+      onClick={() => navigate(`/menus/${city}/${id}`)}
+    >
       <CardHeader className="p-0">
         <img
           src={image}
