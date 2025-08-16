@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import MenuPage from "./pages/MenuPage/MenuPage";
-import CheckOutPage from "./pages/CheckOutPage";
+import CheckOutPage from "./pages/CheckoutPage/CheckoutPage";
 import AddressBookPage from "./pages/AddressBook/AddressBookPage";
 import Header from "./components/Header";
 import LoginModal from "./pages/HomePage/LoginModal";
@@ -10,8 +10,10 @@ import { Toaster } from "@/components/ui/sonner";
 import { LocationsProvider } from "./context/locationContext";
 import { RestaurantProvider } from "./context/RestaurantContext";
 import { CartProvider } from "./context/CartContext";
+import { CheckoutProvider } from "./context/CheckoutContext";
 import AddressForm from "./pages/AddressBook/AddressForm";
 import EditAddressForm from "./pages/AddressBook/EditAddressForm";
+import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -34,7 +36,19 @@ function App() {
                 element={<EditAddressForm />}
               />
               <Route path="/menus/:city/:restaurantId" element={<MenuPage />} />
-              <Route path="/checkout" element={<CheckOutPage />} />
+
+              <Route
+                path="/checkout"
+                element={
+                  <CheckoutProvider>
+                    <CheckOutPage />
+                  </CheckoutProvider>
+                }
+              />
+              <Route
+                path="/orderconfirmation"
+                element={<OrderConfirmationPage />}
+              />
             </Routes>
           </CartProvider>
         </RestaurantProvider>

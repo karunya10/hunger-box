@@ -1,9 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CartContext } from "@/context/CartContext";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 function Item({ menu }) {
   const [quantity, setQuantity] = useState(0);
-  const { setCart, cart } = useContext(CartContext);
+  const { setCart, cart, cartSummary, aggregateCart } = useContext(CartContext);
+  console.log("🚀 ~ Item ~ summary:", cartSummary);
 
   const removeItem = () => {
     const index = cart.findIndex((oneItem) => {
@@ -26,6 +27,13 @@ function Item({ menu }) {
     setQuantity((prev) => prev + 1);
     setCart((prev) => [...prev, menu]);
   };
+
+  useEffect(() => {
+    aggregateCart.length > 0 &&
+      cartSummary[menu.id] &&
+      setQuantity(cartSummary[menu.id].count);
+  }, [cartSummary]);
+
   return (
     <Card key={menu.id}>
       <CardContent className="p-4 flex items-center justify-between">

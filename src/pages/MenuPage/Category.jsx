@@ -1,4 +1,3 @@
-
 import {
   AccordionContent,
   AccordionItem,
@@ -14,7 +13,7 @@ function Category({ category, items }) {
       </AccordionTrigger>
       <AccordionContent className="space-y-4">
         {items.map((menu) => (
-         <Item menu={menu}/>
+          <Item key={menu.id} menu={menu} />
         ))}
       </AccordionContent>
     </AccordionItem>

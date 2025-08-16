@@ -28,7 +28,6 @@ function MenuPage() {
     return accumulator;
   }, {});
 
-
   return (
     <>
       <div className="relative flex">
@@ -45,7 +44,13 @@ function MenuPage() {
                 defaultValue={Object.keys(groupByCategories)[0]}
               >
                 {Object.entries(groupByCategories).map(([category, items]) => {
-                  return <Category category={category} items={items} />;
+                  return (
+                    <Category
+                      key={category}
+                      category={category}
+                      items={items}
+                    />
+                  );
                 })}
               </Accordion>
             )}
