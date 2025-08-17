@@ -3,15 +3,27 @@ import { CartContext } from "@/context/CartContext";
 import { useState, useContext, useEffect } from "react";
 function Item({ menu }) {
   const [quantity, setQuantity] = useState(0);
-  const { setCart, cart, cartSummary, aggregateCart } = useContext(CartContext);
+  const {
+    setCart,
+    cartSummary,
+    aggregateCart,
+    currentRestauratId,
+    currentCart,
+  } = useContext(CartContext);
 
   const removeItem = () => {
-    const index = cart.findIndex((oneItem) => {
+    const index = currentCart.findIndex((oneItem) => {
       return oneItem.id === menu.id;
     });
     if (index != -1) {
       setCart((prev) => {
-        return [...prev.slice(0, index), ...prev.slice(index + 1)];
+        return {
+          ...prev,
+          [currentRestauratId]: [
+            ...prev[currentRestauratId].slice(0, index),
+            ...prev[currentRestauratId].slice(index + 1),
+          ],
+        };
       });
     }
   };
@@ -24,7 +36,12 @@ function Item({ menu }) {
   };
   const handleIncrease = () => {
     setQuantity((prev) => prev + 1);
-    setCart((prev) => [...prev, menu]);
+    setCart((prev) => {
+      return {
+        ...prev,
+        [currentRestauratId]: [...prev[currentRestauratId], menu],
+      };
+    });
   };
 
   useEffect(() => {

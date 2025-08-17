@@ -1,32 +1,49 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  const totalPrice = cart.reduce((accu, oneItem) => {
-    return accu + oneItem.price;
-  }, 0);
-  const cartSummary = cart.reduce((acc, item) => {
-    if (!acc[item.id]) {
-      acc[item.id] = {
-        name: item.name,
-        count: 0,
-        totalPrice: 0,
-      };
-    }
-    acc[item.id].count += 1;
-    acc[item.id].totalPrice += item.price;
-    return acc;
-  }, {});
+  const [cart, setCart] = useState({});
+  const [currentRestauratId, setCurrentRestaurantId] = useState("");
+  const currentCart = cart[currentRestauratId];
 
-  const aggregateCart = Object.values(cartSummary);
+  useEffect(() => {
+    if (currentRestauratId !== "" && !cart[currentRestauratId]) {
+      setCart({ ...cart, [currentRestauratId]: [] });
+    }
+  }, [currentRestauratId]);
+
+  const totalPrice =
+    currentCart &&
+    currentCart.reduce((accu, oneItem) => {
+      return accu + oneItem.price;
+    }, 0);
+
+  const cartSummary =
+    currentCart &&
+    currentCart.reduce((acc, item) => {
+      if (!acc[item.id]) {
+        acc[item.id] = {
+          name: item.name,
+          count: 0,
+          totalPrice: 0,
+        };
+      }
+      acc[item.id].count += 1;
+      acc[item.id].totalPrice += item.price;
+      return acc;
+    }, {});
+
+  const aggregateCart = currentCart && Object.values(cartSummary);
   const value = {
     cart,
     setCart,
     totalPrice,
     aggregateCart,
     cartSummary,
+    currentRestauratId,
+    currentCart,
+    setCurrentRestaurantId,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

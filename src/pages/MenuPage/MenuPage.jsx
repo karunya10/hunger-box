@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { RestaurantContext } from "@/context/RestaurantContext";
 
 import { Accordion } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 
 import Cart from "./Cart";
 import RestaurantInfo from "./RestaurantInfo";
@@ -31,6 +32,9 @@ function MenuPage() {
   return (
     <>
       <div className="relative flex">
+        <Button className=" rounded-lg bg-red-400 hover:bg-red-500 text-white font-semibold my-5 mx-5">
+          Back
+        </Button>
         <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
           {!loadingRestaurants && filteredRestaurant && (
             <RestaurantInfo filteredRestaurant={filteredRestaurant} />
