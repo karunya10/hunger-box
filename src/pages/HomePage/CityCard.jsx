@@ -1,41 +1,46 @@
 import React, { useContext } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+
 import { LocationsContext } from "../../context/locationContext";
 
 const images = {
   chennai: "/images/chennai.png",
   delhi: "/images/delhi.png",
   bengaluru: "/images/bengaluru.png",
+  mumbai: "/images/mumbai.png",
+  hyderabad: "/images/hyderabad.png",
 };
 function CityCard({ city }) {
   const { selectedLocation, setSelectedLocation } =
     useContext(LocationsContext);
 
   return (
-    <Card
-      className={`relative overflow-hidden w-[300px] h-[200px] rounded-xl shadow-md cursor-pointer ${
-        selectedLocation === city
-          ? "ring-5 ring-[rgba(255,107,94,0.4)] scale-108"
-          : ""
+    <div
+      className={`transition-all duration-300 cursor-pointer rounded-xl ${
+        selectedLocation === city ? "scale-100" : "hover:scale-105"
       }`}
-      onClick={() => {
-      
-        setSelectedLocation(city);
-      }}
+      onClick={() => setSelectedLocation(city)}
     >
-      <img
-        src={images[city]}
-        alt={city}
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10" />
-
-      <CardContent className="relative z-20 h-full flex flex-col justify-between p-4">
-        <div>
-          <h2 className="text-white text-xl font-bold">{city}</h2>
-        </div>
-      </CardContent>
-    </Card>
+      <Card className="relative overflow-hidden w-[300px] h-[200px] rounded-xl cursor-pointer">
+        <img
+          src={images[city]}
+          alt={city}
+          className={`absolute inset-0 w-full h-full object-cover z-0 ${
+            selectedLocation === city ? "border-4 rounded-xl" : ""
+          }`}
+          style={
+            selectedLocation === city
+              ? { borderColor: "rgba(255,107,94,1)" }
+              : {}
+          }
+        />
+        <CardContent className="relative z-20 h-full flex flex-col justify-between p-4">
+          <div>
+            <h2 className="text-white text-xl font-bold">{city}</h2>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 

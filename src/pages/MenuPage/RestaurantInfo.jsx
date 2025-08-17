@@ -17,12 +17,7 @@ function RestaurantInfo({ filteredRestaurant }) {
         <Star className="w-4 h-4" />
         {filteredRestaurant.rating}
       </div>
-      <p className="text-sm text-gray-600">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos odio
-        eligendi minus cupiditate alias, earum quidem fugit, nemo blanditiis
-        explicabo in nam voluptates natus! Repudiandae iste earum ipsam impedit
-        maiores.
-      </p>
+      <p className="text-sm text-gray-600">{filteredRestaurant.description}</p>
     </div>
   );
 }

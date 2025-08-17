@@ -44,6 +44,7 @@ function FilterBar() {
 
     return searchMatch && ratingMatch && isVegMatch;
   });
+  console.log("🚀 ~ FilterBar ~ restaurants:", restaurants);
 
   useEffect(() => {
     setFilteredRestaurants(filteredRestaurants);

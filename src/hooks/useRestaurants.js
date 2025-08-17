@@ -27,6 +27,8 @@ function useRestaurants(city) {
             response.data.restaurants[key].storagePath,
           rating: response.data.restaurants[key].avgRating,
           cuisines: response.data.restaurants[key].cuisines,
+          isVeg: response.data.restaurants[key].isVeg,
+          description: response.data.restaurants[key].description,
           //   uid: response.data[key].uid,
         });
       }

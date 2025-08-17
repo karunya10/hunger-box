@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useMenu from "@/hooks/useMenu";
 import { useContext } from "react";
 import { RestaurantContext } from "@/context/RestaurantContext";
@@ -12,7 +12,7 @@ import Category from "./Category";
 
 function MenuPage() {
   const { city, restaurantId } = useParams();
-
+  const navigate = useNavigate();
   const { menus, loading: menuLoading } = useMenu(city, restaurantId);
 
   const { restaurants, loadingRestaurants } = useContext(RestaurantContext);
@@ -32,7 +32,12 @@ function MenuPage() {
   return (
     <>
       <div className="relative flex">
-        <Button className=" rounded-lg bg-red-400 hover:bg-red-500 text-white font-semibold my-5 mx-5">
+        <Button
+          className=" rounded-lg bg-red-400 hover:bg-red-500 text-white font-semibold my-5 mx-5"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           Back
         </Button>
         <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">

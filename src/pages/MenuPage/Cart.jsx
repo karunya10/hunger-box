@@ -30,7 +30,7 @@ function Cart() {
         </div>
         <div className="flex justify-between items-center mb-4">
           <span className="font-semibold">Total</span>
-          <span className="font-bold text-lg">₹ {totalPrice}</span>
+          <span className="font-bold text-lg">₹ {totalPrice.toFixed(2)}</span>
         </div>
         <button
           className="w-full rounded-lg bg-red-400 hover:bg-red-500 text-white font-semibold py-2 transition"
