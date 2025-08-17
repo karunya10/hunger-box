@@ -42,7 +42,7 @@ export default function useAddress() {
   };
   useEffect(() => {
     if (user) {
-      console.log("🚀 ~ useAddress ~ user:", user);
+
 
       fetchAddress();
     }

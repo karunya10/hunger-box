@@ -4,7 +4,6 @@ import { useState, useContext, useEffect } from "react";
 function Item({ menu }) {
   const [quantity, setQuantity] = useState(0);
   const { setCart, cart, cartSummary, aggregateCart } = useContext(CartContext);
-  console.log("🚀 ~ Item ~ summary:", cartSummary);
 
   const removeItem = () => {
     const index = cart.findIndex((oneItem) => {

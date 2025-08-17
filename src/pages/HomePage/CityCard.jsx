@@ -19,6 +19,7 @@ function CityCard({ city }) {
           : ""
       }`}
       onClick={() => {
+      
         setSelectedLocation(city);
       }}
     >
