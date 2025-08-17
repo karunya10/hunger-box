@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CartContext } from "@/context/CartContext";
 
 function OrderSummary() {
-  const { cart, totalPrice, aggregateCart } = useContext(CartContext);
+  const { currentCart, totalPrice, aggregateCart } = useContext(CartContext);
 
   return (
     <CardContent>
@@ -12,7 +12,7 @@ function OrderSummary() {
         <CardContent className="space-y-4">
           <h2 className="text-lg font-semibold">Order Summary</h2>
           <div className="space-y-2">
-            {cart.length > 0 &&
+            {currentCart.length > 0 &&
               aggregateCart.map((item, index) => (
                 <div key={index} className="flex justify-between text-sm">
                   <span>
@@ -20,7 +20,7 @@ function OrderSummary() {
                     <span className="text-gray-500"> x {item.count}</span>
                   </span>
                   <span className="text-right">
-                    ${item.totalPrice.toFixed(2)}
+                    ₹ {item.totalPrice.toFixed(2)}
                   </span>
                 </div>
               ))}
