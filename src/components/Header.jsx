@@ -18,15 +18,12 @@ export default function Header({ onLoginClick }) {
 
   const navigate = useNavigate();
 
-
-
-
   return (
     <header
       className="w-full px-4 py-5 border-b flex items-center justify-between"
       style={{ backgroundColor: "#FF6B5E" }}
     >
-      <div className="flex-1">
+      <div className="flex-1" onClick={() => navigate("/")}>
         <img
           src="/logo.svg"
           alt="Hunger-Box"
@@ -63,7 +60,9 @@ export default function Header({ onLoginClick }) {
               </DropdownMenuItem>
             )}
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={()=>navigate("/address")}>Address Book</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate("/address")}>
+              Address Book
+            </DropdownMenuItem>
             <DropdownMenuItem>Wallet</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
           </DropdownMenuContent>
