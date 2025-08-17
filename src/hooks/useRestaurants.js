@@ -1,48 +1,32 @@
-// import { useAuthState } from "react-firebase-hooks/auth";
 import { useState, useEffect } from "react";
-// import { auth } from "../config/firebase";
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_DATABASE_URL;
+import useFetch from "./useFetch";
 
 function useRestaurants(city) {
   const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const fetchRestaurants = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(`${API_URL}/locations/${city}.json`);
-      if (response.status !== 200) {
-        throw new Error("Failed to Fetch Restaurants");
-      }
-      const restaurantsArr = [];
-      for (const key in response.data.restaurants) {
-        restaurantsArr.push({
-          id: key,
-          name: response.data.restaurants[key].name,
-          image:
-            "https://food-delivery-da806.web.app/assets/" +
-            response.data.restaurants[key].storagePath,
-          rating: response.data.restaurants[key].avgRating,
-          cuisines: response.data.restaurants[key].cuisines,
-          isVeg: response.data.restaurants[key].isVeg,
-          description: response.data.restaurants[key].description,
-          //   uid: response.data[key].uid,
-        });
-      }
-      setRestaurants(restaurantsArr);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { request, loading, error } = useFetch();
 
   useEffect(() => {
     fetchRestaurants();
   }, [city]);
+
+  const fetchRestaurants = async () => {
+    const response = await request({ url: `/locations/${city}.json` });
+    const restaurantsArr = [];
+    for (const key in response.restaurants) {
+      restaurantsArr.push({
+        id: key,
+        name: response.restaurants[key].name,
+        image:
+          "https://food-delivery-da806.web.app/assets/" +
+          response.restaurants[key].storagePath,
+        rating: response.restaurants[key].avgRating,
+        cuisines: response.restaurants[key].cuisines,
+        isVeg: response.restaurants[key].isVeg,
+        description: response.restaurants[key].description,
+      });
+    }
+    setRestaurants(restaurantsArr);
+  };
 
   return { restaurants, loading, error };
 }
