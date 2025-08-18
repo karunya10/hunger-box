@@ -3,13 +3,14 @@ import RestaurantCard from "./RestaurantCard";
 import FilterBar from "./FilterBar";
 import { RestaurantContext } from "../../context/RestaurantContext";
 
+
 function Restaurants() {
   const {
     restaurants,
     filteredRestaurants,
     loadingRestaurants: loading,
   } = useContext(RestaurantContext);
-
+ 
   return (
     <div>
       <FilterBar />

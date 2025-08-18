@@ -17,6 +17,18 @@ function FilterBar() {
     isVeg: null,
   });
 
+  useEffect(() => {
+    setFilteredRestaurants(filteredRestaurants);
+  }, [filters]);
+
+  useEffect(() => {
+    setFilters({
+      search: "",
+      rating: null,
+      isVeg: null,
+    });
+  }, [location]);
+
   const handleSearchFilter = (e) => {
     setFilters((prev) => ({ ...prev, search: e.target.value }));
   };
@@ -44,11 +56,6 @@ function FilterBar() {
 
     return searchMatch && ratingMatch && isVegMatch;
   });
-  console.log("🚀 ~ FilterBar ~ restaurants:", restaurants);
-
-  useEffect(() => {
-    setFilteredRestaurants(filteredRestaurants);
-  }, [filters]);
 
   return (
     <>

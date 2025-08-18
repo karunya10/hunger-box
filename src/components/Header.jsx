@@ -1,4 +1,3 @@
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -14,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Header({ onLoginClick }) {
   const [user] = useAuthState(auth);
-const avatarUrl = user?.photoURL ?? "";
+  const avatarUrl = user ? user.photoURL : "";
 
   const navigate = useNavigate();
 
@@ -64,7 +63,9 @@ const avatarUrl = user?.photoURL ?? "";
               Address Book
             </DropdownMenuItem>
             <DropdownMenuItem>Wallet</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate("/settings")}>
+              Settings
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

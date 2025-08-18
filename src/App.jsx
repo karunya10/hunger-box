@@ -35,6 +35,11 @@ function App() {
                 path="/address/edit/:addressId"
                 element={<EditAddressForm />}
               />
+
+                <Route
+                path="/settings"
+                element={<OrderConfirmationPage />}
+              />
               <Route path="/menus/:city/:restaurantId" element={<MenuPage />} />
 
               <Route
