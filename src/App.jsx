@@ -4,7 +4,7 @@ import MenuPage from "./pages/MenuPage/MenuPage";
 import CheckOutPage from "./pages/CheckoutPage/CheckoutPage";
 import AddressBookPage from "./pages/AddressBook/AddressBookPage";
 import Header from "./components/Header";
-import LoginModal from "./pages/HomePage/LoginModal";
+import LoginModal from "./components/LoginModal";
 import { useState } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { SettingsProvider } from "./context/SettingsContext";
@@ -12,10 +12,9 @@ import { LocationsProvider } from "./context/locationContext";
 import { RestaurantProvider } from "./context/RestaurantContext";
 import { CartProvider } from "./context/CartContext";
 import { CheckoutProvider } from "./context/CheckoutContext";
-import AddressForm from "./pages/AddressBook/AddressForm";
-import EditAddressForm from "./pages/AddressBook/EditAddressForm";
+import AddressFormPage from "./pages/AddressBook/AddressFormPage";
+import EditAddressFormPage from "./pages/AddressBook/EditAddressFormPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
-import SettingsPage from "./components/Settings";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -33,10 +32,10 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/address" element={<AddressBookPage />} />
-                <Route path="/address/new" element={<AddressForm />} />
+                <Route path="/address/new" element={<AddressFormPage />} />
                 <Route
                   path="/address/edit/:addressId"
-                  element={<EditAddressForm />}
+                  element={<EditAddressFormPage />}
                 />
 
                 <Route

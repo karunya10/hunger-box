@@ -6,9 +6,9 @@ import { RestaurantContext } from "@/context/RestaurantContext";
 import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 
-import Cart from "./Cart";
-import RestaurantInfo from "./RestaurantInfo";
-import Category from "./Category";
+import Cart from "./components/Cart";
+import RestaurantInfo from "./components/RestaurantInfo";
+import Category from "./components/Category";
 
 function MenuPage() {
   const { city, restaurantId } = useParams();

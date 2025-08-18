@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { LocationsContext } from "../../context/locationContext";
+import { LocationsContext } from "@/context/LocationContext";
 
 const images = {
   chennai: "/images/chennai.png",

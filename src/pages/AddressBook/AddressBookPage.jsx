@@ -1,5 +1,5 @@
 import React from "react";
-import AddressForm from "./AddressForm";
+import AddressForm from "./AddressFormPage";
 import { useNavigate } from "react-router-dom";
 import useAddress from "@/hooks/useAddress";
 import { Card, CardContent } from "@/components/ui/card";

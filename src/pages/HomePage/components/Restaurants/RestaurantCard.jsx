@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { LocationsContext } from "@/context/LocationContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/config/firebase";
-import LoginModal from "./LoginModal";
+import LoginModal from "@/components/LoginModal";
 
 export default function RestaurantCard({ image, name, cuisines, rating, id }) {
   const [showLoginModal, setShowLoginModal] = useState(false);

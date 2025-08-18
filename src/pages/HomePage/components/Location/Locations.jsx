@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import CityCard from "./CityCard";
-import { LocationsContext } from "../../context/locationContext";
+import { LocationsContext } from "@/context/LocationContext";
 import {
   Carousel,
   CarouselContent,

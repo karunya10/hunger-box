@@ -4,8 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Star } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { RestaurantContext } from "../../context/RestaurantContext";
-import { LocationsContext } from "../../context/LocationContext";
+import { RestaurantContext } from "@/context/RestaurantContext";
+import { LocationsContext } from "@/context/LocationContext";
 
 function FilterBar() {
   const { restaurants, setFilteredRestaurants } = useContext(RestaurantContext);

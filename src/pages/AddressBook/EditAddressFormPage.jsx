@@ -1,12 +1,20 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addressSchema } from "@/schemas/schemas";
 import useAddress from "@/hooks/useAddress";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export default function AddressForm() {
-  const { addAddress } = useAddress();
+export default function EditAddressFormPage() {
+  const { editAddress, addresses } = useAddress();
+  const { addressId } = useParams();
   const navigate = useNavigate();
+
+  const editingAddress = addresses.find((address) => {
+    return address.id === addressId;
+  });
+
   const {
     register,
     handleSubmit,
@@ -14,20 +22,24 @@ export default function AddressForm() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(addressSchema),
-    defaultValues: {
-      street: "",
-      houseNo: "",
-      phone: "",
-    },
+    defaultValues: { ...editingAddress },
   });
 
   const onSubmit = (data) => {
-    addAddress(data);
+    console.log("✅ Valid data:", data);
+    editAddress(data);
+    navigate(-1);
   };
 
   const handleReset = () => {
     reset();
   };
+
+  useEffect(() => {
+    if (editingAddress) {
+      reset(editingAddress);
+    }
+  }, [editingAddress, reset]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
@@ -35,8 +47,6 @@ export default function AddressForm() {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5 w-full max-w-xl p-8 bg-white rounded-xl shadow-md"
       >
-        <h2 className="text-2xl font-semibold text-center">Add Address</h2>
-
         <div>
           <input
             placeholder="Street"
@@ -55,7 +65,7 @@ export default function AddressForm() {
             className="border px-3 py-2 w-full rounded"
           />
           {errors.houseNo && (
-            <p className="text-red-500 text-sm">{errors.houseNo.message}</p>
+            <p className="text-red-500 text-sm">{errors.street.message}</p>
           )}
         </div>
 
@@ -77,7 +87,7 @@ export default function AddressForm() {
             className="border px-3 py-2 w-full rounded"
           />
           {errors.pincode && (
-            <p className="text-red-500 text-sm">{errors.pincode.message}</p>
+            <p className="text-red-500 text-sm ">{errors.pincode.message}</p>
           )}
         </div>
 
@@ -102,14 +112,12 @@ export default function AddressForm() {
             <p className="text-red-500 text-sm">{errors.phone.message}</p>
           )}
         </div>
-
         <div className="flex justify-between gap-4 pt-2">
           <button
-            type="button"
-            onClick={() => navigate(-1)}
-            className="flex-1 bg-gray-400 hover:bg-gray-500 text-white py-2 rounded"
+            type="submit"
+            className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded"
           >
-            Back
+            Submit
           </button>
 
           <button
@@ -118,13 +126,6 @@ export default function AddressForm() {
             className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded"
           >
             Reset
-          </button>
-
-          <button
-            type="submit"
-            className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded"
-          >
-            Submit
           </button>
         </div>
       </form>
