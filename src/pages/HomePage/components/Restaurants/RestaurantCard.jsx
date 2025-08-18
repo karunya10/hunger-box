@@ -5,6 +5,7 @@ import { LocationsContext } from "@/context/LocationContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/config/firebase";
 import LoginModal from "@/components/LoginModal";
+import { Star } from "lucide-react";
 
 export default function RestaurantCard({ image, name, cuisines, rating, id }) {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -19,7 +20,7 @@ export default function RestaurantCard({ image, name, cuisines, rating, id }) {
   return (
     <>
       <Card
-        className="w-full sm:w-[350px] shadow-md hover:shadow-xl transition-shadow py-0 pb-5 cursor-pointer"
+        className="w-full shadow-md hover:shadow-xl transition-shadow py-0 pb-5 cursor-pointer"
         onClick={handleRestaurantCardClick}
       >
         <CardHeader className="p-0">
@@ -43,7 +44,7 @@ export default function RestaurantCard({ image, name, cuisines, rating, id }) {
               ring-1 ring-emerald-100
             "
             >
-              <span aria-hidden>⭐</span>
+              <Star className="w-4 h-4 fill-emerald-700 stroke-emerald-700" />
               {rating}
             </span>
           </div>

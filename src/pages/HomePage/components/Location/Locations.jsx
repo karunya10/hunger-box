@@ -19,7 +19,7 @@ function Locations() {
         </h2>
         <div className="flex justify-center gap-5">
           <Carousel className="w-250">
-            <CarouselContent className="-ml-4">
+            <CarouselContent>
               {locations.map((city) => {
                 return (
                   <CarouselItem key={city} className="pl-4 basis-1/3">

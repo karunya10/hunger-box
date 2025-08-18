@@ -16,7 +16,7 @@ function CityCard({ city }) {
 
   return (
     <div
-      className={`transition-all duration-300 cursor-pointer rounded-xl ${
+      className={`duration-300 cursor-pointer rounded-xl z-0 ${
         selectedLocation === city ? "scale-100" : "hover:scale-105"
       }`}
       onClick={() => setSelectedLocation(city)}
@@ -25,7 +25,7 @@ function CityCard({ city }) {
         <img
           src={images[city]}
           alt={city}
-          className={`absolute inset-0 w-full h-full object-cover z-0 ${
+          className={`absolute inset-0 w-full h-full object-cover ${
             selectedLocation === city ? "border-4 rounded-xl" : ""
           }`}
           style={

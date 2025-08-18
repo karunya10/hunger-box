@@ -36,7 +36,7 @@ export default function useAddress() {
 
   const addAddress = async (address) => {
     const token = await user.getIdToken();
-    const response = await request({
+    await request({
       url: `/addresses/${user.uid}.json?auth=${token}`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -47,7 +47,7 @@ export default function useAddress() {
 
   const editAddress = async (address, addressId) => {
     const token = await user.getIdToken();
-    const response = await request({
+    await request({
       url: `/addresses/${user.uid}/${addressId}.json?auth=${encodeURIComponent(
         token
       )}`,
@@ -61,7 +61,7 @@ export default function useAddress() {
 
   const deleteAddress = async (addressId) => {
     const token = await user.getIdToken();
-    const response = await request({
+    await request({
       url: `/addresses/${user.uid}/${addressId}.json?auth=${token}`,
       method: "DELETE",
     });

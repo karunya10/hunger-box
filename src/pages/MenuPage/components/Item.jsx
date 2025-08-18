@@ -3,6 +3,7 @@ import { CartContext } from "@/context/CartContext";
 import { useState, useContext, useEffect } from "react";
 function Item({ menu }) {
   const [quantity, setQuantity] = useState(0);
+
   const {
     setCart,
     cartSummary,
@@ -48,7 +49,7 @@ function Item({ menu }) {
     aggregateCart.length > 0 &&
       cartSummary[menu.id] &&
       setQuantity(cartSummary[menu.id].count);
-  }, [cartSummary]);
+  }, []);
 
   return (
     <Card key={menu.id}>

@@ -16,11 +16,7 @@ function Settings() {
   return (
     <div className="flex items-center space-x-2">
       <Sun className="h-4 w-4 text-yellow-500" />
-      <Switch
-        id="night-mode"
-        checked={darkMode}
-        onCheckedChange={setDarkMode}
-      />
+      <Switch checked={darkMode} onCheckedChange={setDarkMode} />
       <Moon className="h-4 w-4 text-blue-500" />
     </div>
   );

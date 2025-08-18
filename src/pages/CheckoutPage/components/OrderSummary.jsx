@@ -29,7 +29,7 @@ function OrderSummary() {
           <div className="space-y-1 text-sm">
             <div className="flex justify-between font-semibold text-red-500 pt-1">
               <span>Total</span>
-              <span> ₹ {totalPrice.toFixed(2)}</span>
+              <span> ₹ {totalPrice().toFixed(2)}</span>
             </div>
           </div>
         </CardContent>

@@ -4,11 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useAddress from "@/hooks/useAddress";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Pencil1Icon,
-  TrashIcon,
-  DrawingPinFilledIcon,
-} from "@radix-ui/react-icons";
+import { Pencil, Trash2, Pin } from "lucide-react";
 
 function AddressBookPage() {
   const navigate = useNavigate();
@@ -36,10 +32,10 @@ function AddressBookPage() {
                 className="flex items-center justify-between px-4 py-3"
               >
                 <div className="flex items-start gap-3">
-                  <DrawingPinFilledIcon className="mt-1 w-5 h-5 text-muted-foreground" />
+                  <Pin className="mt-1 w-5 h-5" />
                   <div>
                     <p className="font-semibold">{address.street}</p>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm">
                       {address.city}, {address.pincode}
                     </p>
                   </div>
@@ -48,21 +44,19 @@ function AddressBookPage() {
                 <div className="flex items-center gap-3">
                   <Button
                     variant="ghost"
-                    size="icon"
                     onClick={() => {
                       navigate(`/address/edit/${address.id}`);
                     }}
                   >
-                    <Pencil1Icon className="w-4 h-4" />
+                    <Pencil className="w-4 h-4" />
                   </Button>
                   <Button
                     variant="ghost"
-                    size="icon"
                     onClick={() => {
                       deleteAddress(address.id);
                     }}
                   >
-                    <TrashIcon className="w-4 h-4" />
+                    <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>
               </Card>

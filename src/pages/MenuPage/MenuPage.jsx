@@ -1,7 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import useMenu from "@/hooks/useMenu";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { RestaurantContext } from "@/context/RestaurantContext";
+import { CartContext } from "@/context/CartContext";
 
 import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,12 @@ function MenuPage() {
   const { menus, loading: menuLoading } = useMenu(city, restaurantId);
 
   const { restaurants, loadingRestaurants } = useContext(RestaurantContext);
+
+  const { setCurrentRestaurantId } = useContext(CartContext);
+
+  useEffect(() => {
+    setCurrentRestaurantId(restaurantId);
+  }, []);
 
   const filteredRestaurant = restaurants.find((restaurant) => {
     return restaurant.id == restaurantId;
@@ -46,13 +53,14 @@ function MenuPage() {
           )}
 
           <div>
-            {!menuLoading && menus.length > 0 && (
+            {!menuLoading && (
               <Accordion
                 type="single"
                 className="w-full space-y-4"
                 defaultValue={Object.keys(groupByCategories)[0]}
               >
-                {Object.entries(groupByCategories).map(([category, items]) => {
+                {Object.entries(groupByCategories).map((entry) => {
+                  const [category, items] = entry;
                   return (
                     <Category
                       key={category}

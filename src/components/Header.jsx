@@ -32,7 +32,7 @@ export default function Header({ onLoginClick }) {
       </div>
 
       <div className=" flex gap-4 justify-center items-center">
-        <Settings className="" />
+        <Settings  />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">

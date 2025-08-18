@@ -18,6 +18,17 @@ function FilterBar() {
   });
 
   useEffect(() => {
+    const filteredRestaurants = restaurants.filter((restaurant) => {
+      const searchMatch =
+        filters.search === "" ||
+        restaurant.name.toLowerCase().includes(filters.search.toLowerCase());
+      const ratingMatch =
+        filters.rating === null || restaurant.rating >= filters.rating;
+      const isVegMatch =
+        filters.isVeg === null || restaurant.isVeg === filters.isVeg;
+
+      return searchMatch && ratingMatch && isVegMatch;
+    });
     setFilteredRestaurants(filteredRestaurants);
   }, [filters]);
 
@@ -45,18 +56,6 @@ function FilterBar() {
     }));
   };
 
-  const filteredRestaurants = restaurants.filter((restaurant) => {
-    const searchMatch =
-      filters.search === "" ||
-      restaurant.name.toLowerCase().includes(filters.search.toLowerCase());
-    const ratingMatch =
-      filters.rating === null || restaurant.rating >= filters.rating;
-    const isVegMatch =
-      filters.isVeg === null || restaurant.isVeg === filters.isVeg;
-
-    return searchMatch && ratingMatch && isVegMatch;
-  });
-
   return (
     <>
       <div className="max-w-[1200px] mx-auto my-10">
@@ -68,7 +67,6 @@ function FilterBar() {
           />
           <Badge
             variant="outline"
-            className="whitespace-nowrap"
             style={{ color: "#FF6F61", backgroundColor: "#FFF5F3" }}
           >
             {location}
@@ -77,7 +75,7 @@ function FilterBar() {
         <div className="flex gap-5 my-2 justify-center">
           <Badge
             variant="default"
-            className="whitespace-nowrap flex cursor-pointer hover:scale-108"
+            className="flex cursor-pointer hover:scale-108"
             style={
               filters.rating
                 ? { color: "#FFF5F3", backgroundColor: "#FF6F61" }

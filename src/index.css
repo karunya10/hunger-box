@@ -6,11 +6,6 @@
   font-family: "InterVariable", sans-serif;
 }
 
-/* body {
-  background-color: #f9fafb; 
-  color: #111827; 
-} */
-
 body.light-mode {
   background: f9fafb;
   color: #111827;
@@ -23,9 +18,8 @@ body.dark-mode {
 
 @custom-variant dark (&:is(.dark *));
 
-/* Optional: quick theme tokens (works well with shadcn) */
 @theme {
-  --color-primary: #0ea5e9; /* sky-500 */
+  --color-primary: #0ea5e9;
 }
 
 @theme inline {

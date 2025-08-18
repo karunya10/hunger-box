@@ -5,7 +5,7 @@ export const CartContext = createContext(null);
 export function CartProvider({ children }) {
   const [cart, setCart] = useState({});
   const [currentRestauratId, setCurrentRestaurantId] = useState("");
-  const currentCart = cart[currentRestauratId];
+  const currentCart = cart[currentRestauratId] ? cart[currentRestauratId] : [];
 
   useEffect(() => {
     if (currentRestauratId !== "" && !cart[currentRestauratId]) {
@@ -13,11 +13,14 @@ export function CartProvider({ children }) {
     }
   }, [currentRestauratId]);
 
-  const totalPrice =
-    currentCart &&
-    currentCart.reduce((accu, oneItem) => {
-      return accu + oneItem.price;
-    }, 0);
+  const totalPrice = () => {
+    const price =
+      currentCart &&
+      currentCart.reduce((accu, oneItem) => {
+        return accu + oneItem.price;
+      }, 0);
+    return price;
+  };
 
   const cartSummary =
     currentCart &&

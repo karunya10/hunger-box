@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInWithGoogle, signUp, login } from "@/config/firebase";
 import { useState } from "react";
+
 export default function LoginModal({ open, onOpenChange }) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -17,11 +18,11 @@ export default function LoginModal({ open, onOpenChange }) {
   const handleLogin = async () => {
     try {
       await login(userName, password);
+      onOpenChange(false);
       toast.success("Login Successful", {
         description: "Welcome back!",
         duration: 3000,
       });
-      onOpenChange(false);
     } catch (error) {
       toast.error(error.message, {
         duration: 3000,
