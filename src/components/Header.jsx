@@ -10,6 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOutUser } from "@/config/firebase";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
+import Settings from "./Settings";
 
 export default function Header({ onLoginClick }) {
   const [user] = useAuthState(auth);
@@ -30,7 +31,8 @@ export default function Header({ onLoginClick }) {
         />
       </div>
 
-      <div className="flex-1 flex justify-end">
+      <div className=" flex gap-4 justify-center items-center">
+        <Settings className="" />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
@@ -63,9 +65,6 @@ export default function Header({ onLoginClick }) {
               Address Book
             </DropdownMenuItem>
             <DropdownMenuItem>Wallet</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/settings")}>
-              Settings
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

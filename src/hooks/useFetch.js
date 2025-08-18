@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_DATABASE_URL;
+const API_URL =
+  "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app";
 
 export default function useFetch() {
   const [loading, setLoading] = useState(false);

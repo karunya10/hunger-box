@@ -6,10 +6,21 @@
   font-family: "InterVariable", sans-serif;
 }
 
-body {
-  background-color: #f9fafb; /* slate-50 */
-  color: #111827; /* gray-900 */
+/* body {
+  background-color: #f9fafb; 
+  color: #111827; 
+} */
+
+body.light-mode {
+  background: f9fafb;
+  color: #111827;
 }
+
+body.dark-mode {
+  background: #18181b;
+  color: #f3f4f6;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /* Optional: quick theme tokens (works well with shadcn) */
