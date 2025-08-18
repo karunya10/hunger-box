@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -14,13 +14,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function Header({ onLoginClick }) {
   const [user] = useAuthState(auth);
-  const avatarUrl = useMemo(() => user?.photoURL ?? "", [user?.photoURL]);
+const avatarUrl = user?.photoURL ?? "";
 
   const navigate = useNavigate();
 
   return (
     <header
-      className="w-full px-4 py-5 border-b flex items-center justify-between"
+      className="w-full px-4 py-5 border-b flex items-center justify-between  sticky top-0 z-50"
       style={{ backgroundColor: "#FF6B5E" }}
     >
       <div className="flex-1" onClick={() => navigate("/")}>
