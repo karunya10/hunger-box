@@ -64,7 +64,7 @@ export default function Header({ onLoginClick }) {
             <DropdownMenuItem onClick={() => navigate("/address")}>
               Address Book
             </DropdownMenuItem>
-            <DropdownMenuItem>Wallet</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate("/wallet")}>Wallet</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

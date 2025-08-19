@@ -1,79 +1,84 @@
-import { useState, useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../config/firebase";
-import useFetch from "./useFetch";
+import { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 
-export default function useCards() {
-  const [user] = useAuthState(auth);
-  const [cards, setCards] = useState([]);
-  const { request, loading, error } = useFetch();
+loadStripe(import.meta.env.VITE_STRIPE_PK);
 
-  useEffect(() => {
-    if (user) {
-      fetchCards();
+export function useCards(user) {
+  const [clientSecret, setClientSecret] = useState("");
+  const [savedCards, setSavedCards] = useState([]);
+  const uid = user.uid;
+
+  // 1. Call function to create SetupIntent
+  async function startCardSave() {
+    const res = await fetch(
+      "https://<your-region>-<project>.cloudfunctions.net/api/create-setup-intent",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uid, email: user.email }),
+      }
+    );
+    const { clientSecret } = await res.json();
+    setClientSecret(clientSecret);
+  }
+
+  // 2. Confirm card from frontend
+  async function saveCard(stripe, elements) {
+    const { setupIntent, error } = await stripe.confirmSetup({ elements });
+    if (error) {
+      console.error("Stripe error:", error);
+      return false;
     }
-  }, [user]);
 
-  const fetchCards = async () => {
-    const token = await user.getIdToken();
-    const response = await request({
-      url: `/cards/${user.uid}.json?auth=${token}`,
-    });
-    const cardsArr = [];
-    for (const key in response) {
-      cardsArr.push({
-        id: key,
-        cardNumber: response[key].cardNumber,
-        expiry: {
-          month: response[key].expiry.month,
-          year: response[key].expiry.year,
-        },
-        cvv: response[key].cvv,
-      });
-    }
-    setCards(cardsArr);
-  };
+    await fetch(
+      "https://<your-region>-<project>.cloudfunctions.net/api/store-payment-method",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          uid,
+          paymentMethodId: setupIntent.payment_method,
+        }),
+      }
+    );
 
-  const addCard = async (card) => {
-    const token = await user.getIdToken();
-    const response = await request({
-      url: `/cards/${user.uid}.json?auth=${token}`,
-      method: "POST",
-      data: JSON.stringify({ ...card, uid: user.uid }),
-      headers: { "Content-Type": "application/json" },
-    });
-    fetchCards();
-  };
+    return true;
+  }
 
-  const editCard = async (card, cardId) => {
-    const token = await user.getIdToken();
-    const response = await request({
-      url: `/cards/${user.uid}/${cardId}.json?auth=${encodeURIComponent(
-        token
-      )}`,
-      method: "PUT",
-      data: JSON.stringify({ ...card, uid: user.uid }),
-      headers: { "Content-Type": "application/json" },
-    });
-    fetchCards();
-  };
+  // 3. Fetch saved cards from Firebase DB (REST)
+  async function fetchCards() {
+    const res = await fetch(
+      `https://<project>.firebaseio.com/users/${uid}/stripe/cards.json`
+    );
+    const data = await res.json();
+    const cards = Object.entries(data || {}).map(([id, info]) => ({
+      id,
+      ...info,
+    }));
+    setSavedCards(cards);
+  }
 
-  const deleteAddress = async (cardId) => {
-    const token = await user.getIdToken();
-    const response = await request({
-      url: `/cards/${user.uid}/${cardId}.json?auth=${token}`,
-      method: "DELETE",
-    });
-    fetchCards();
-  };
+  // 4. Charge selected card
+  async function payWithCard(paymentMethodId, amount) {
+    const res = await fetch(
+      "https://<your-region>-<project>.cloudfunctions.net/api/pay-with-saved-card",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uid, paymentMethodId, amount }),
+      }
+    );
+    const result = await res.json();
+    return result;
+  }
 
   return {
+    startCardSave,
+    clientSecret,
+    saveCard,
+    savedCards,
     fetchCards,
-    addCard,
-    editCard,
-    deleteAddress,
-    cards,
-    loading,
-    error,
+    payWithCard,
   };
 }
