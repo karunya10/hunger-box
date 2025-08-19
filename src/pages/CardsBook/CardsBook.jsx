@@ -8,7 +8,7 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { useCards } from "@/hooks/useCards";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../config/firebase";
+import { auth } from "@/config/firebase";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
