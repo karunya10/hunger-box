@@ -3,10 +3,13 @@ import useFetch from "./useFetch";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase";
 
+const API_URL =
+  "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app";
+
 export default function useAddress() {
   const [user] = useAuthState(auth);
-  // const [addresses, setAddresses] = useState([]);
-  const { data: addresses, loading, error, request } = useFetch();
+  const [addresses, setAddresses] = useState([]);
+  const { data, loading, error, request } = useFetch({ API_URL });
 
   useEffect(() => {
     if (user) {
@@ -14,24 +17,27 @@ export default function useAddress() {
     }
   }, [user]);
 
-  const fetchAddress = async () => {
-    const token = await user.getIdToken();
-    const response = await request({
-      url: `/addresses/${user.uid}.json?auth=${token}`,
-    });
+  useEffect(() => {
     const addressesArr = [];
-    for (const key in response) {
+    for (const key in data) {
       addressesArr.push({
         id: key,
-        street: response[key].street,
-        houseNo: response[key].houseNo,
-        pincode: response[key].pincode,
-        city: response[key].city,
-        country: response[key].country,
-        phone: response[key].phone,
+        street: data[key].street,
+        houseNo: data[key].houseNo,
+        pincode: data[key].pincode,
+        city: data[key].city,
+        country: data[key].country,
+        phone: data[key].phone,
       });
     }
     setAddresses(addressesArr);
+  }, [data]);
+
+  const fetchAddress = async () => {
+    const token = await user.getIdToken();
+    await request({
+      url: `/addresses/${user.uid}.json?auth=${token}`,
+    });
   };
 
   const addAddress = async (address) => {
