@@ -16,6 +16,7 @@ import AddressFormPage from "./pages/AddressBook/AddressFormPage";
 import EditAddressFormPage from "./pages/AddressBook/EditAddressFormPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import CardsBook from "./pages/CardsBook/CardsBook";
+import CardsListPage from "./pages/CardsBook/CardsListPage";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -56,7 +57,8 @@ function App() {
                   path="/orderconfirmation"
                   element={<OrderConfirmationPage />}
                 />
-                <Route path="/wallet" element={<CardsBook />} />
+                <Route path="/wallet" element={<CardsListPage />} />
+                <Route path="/wallet/new" element={<CardsBook />} />
               </Routes>
             </CartProvider>
           </RestaurantProvider>
