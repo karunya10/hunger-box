@@ -15,6 +15,7 @@ import { CheckoutProvider } from "./context/CheckoutContext";
 import AddressFormPage from "./pages/AddressBook/AddressFormPage";
 import EditAddressFormPage from "./pages/AddressBook/EditAddressFormPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
+import CardsBook from "./pages/CardsBook/CardsBook";
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -55,6 +56,7 @@ function App() {
                   path="/orderconfirmation"
                   element={<OrderConfirmationPage />}
                 />
+                <Route path="/wallet" element={<CardsBook />} />
               </Routes>
             </CartProvider>
           </RestaurantProvider>

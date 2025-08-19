@@ -9,8 +9,7 @@ function Restaurants() {
     filteredRestaurants,
     loadingRestaurants: loading,
   } = useContext(RestaurantContext);
-  
-  console.log(restaurants);
+
   return (
     <div>
       <FilterBar />
@@ -23,8 +22,6 @@ function Restaurants() {
                 ? restaurants
                 : filteredRestaurants
               ).map((restaurant) => {
-                console.log("🚀 ~ Restaurants ~ restaurant:", restaurant);
-
                 const { id, image, name, rating, cuisines } = restaurant;
 
                 return (
