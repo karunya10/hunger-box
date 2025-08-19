@@ -6,8 +6,6 @@ import {
 import Item from "./Item";
 
 function Category({ category, items }) {
-  console.log("🚀 ~ Category ~ category:", category);
-
   return (
     <AccordionItem key={category} value={category}>
       <AccordionTrigger className="text-xl font-semibold capitalize">

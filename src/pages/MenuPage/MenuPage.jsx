@@ -52,12 +52,8 @@ function MenuPage() {
           {!loadingRestaurants && filteredRestaurant && (
             <RestaurantInfo filteredRestaurant={filteredRestaurant} />
           )}
-          {console.log(
-            "🚀 ~ Object.keys(groupByCategories)[0]:",
-            Object.keys(groupByCategories)[0]
-          )}
           <div>
-            {!menuLoading && (
+            {!menuLoading && menus.length > 0 && (
               <Accordion
                 type="single"
                 className="w-full space-y-4"
