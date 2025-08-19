@@ -1,12 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 
-const API_URL =
-  "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app";
 
-export default function useFetch() {
+export default function useFetch({ API_URL }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [data, setData] = useState([]);
 
   const request = async ({
     url,
@@ -18,13 +17,14 @@ export default function useFetch() {
     setError(null);
     try {
       const response = await axios({
-        url: `${API_URL}${url}`,
+        baseURL: API_URL,
+        url,
         method,
         data,
         headers,
       });
       setLoading(false);
-      return response.data;
+      setData(response.data);
     } catch (err) {
       setError(err.message);
       setLoading(false);
@@ -32,5 +32,5 @@ export default function useFetch() {
     }
   };
 
-  return { request, loading, error };
+  return { data, loading, error, request };
 }

@@ -1,32 +1,38 @@
 import { useState, useEffect } from "react";
 import useFetch from "./useFetch";
+const API_URL =
+  "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app";
 
 function useRestaurants(city) {
   const [restaurants, setRestaurants] = useState([]);
-  const { request, loading, error } = useFetch();
+
+  const { data, loading, error, request } = useFetch({ API_URL });
 
   useEffect(() => {
+    const fetchRestaurants = async () => {
+      await request({ url: `/locations/${city}.json` });
+    };
     fetchRestaurants();
   }, [city]);
 
-  const fetchRestaurants = async () => {
-    const response = await request({ url: `/locations/${city}.json` });
+  useEffect(() => {
     const restaurantsArr = [];
-    for (const key in response.restaurants) {
+    for (const key in data.restaurants) {
       restaurantsArr.push({
         id: key,
-        name: response.restaurants[key].name,
+        name: data.restaurants[key].name,
         image:
           "https://food-delivery-da806.web.app/assets/" +
-          response.restaurants[key].storagePath,
-        rating: response.restaurants[key].avgRating,
-        cuisines: response.restaurants[key].cuisines,
-        isVeg: response.restaurants[key].isVeg,
-        description: response.restaurants[key].description,
+          data.restaurants[key].storagePath,
+        rating: data.restaurants[key].avgRating,
+        cuisines: data.restaurants[key].cuisines,
+        isVeg: data.restaurants[key].isVeg,
+        description: data.restaurants[key].description,
       });
+
+      setRestaurants(restaurantsArr);
     }
-    setRestaurants(restaurantsArr);
-  };
+  }, [data]);
 
   return { restaurants, loading, error };
 }

@@ -5,8 +5,8 @@ import { auth } from "../config/firebase";
 
 export default function useAddress() {
   const [user] = useAuthState(auth);
-  const [addresses, setAddresses] = useState([]);
-  const { request, loading, error } = useFetch();
+  // const [addresses, setAddresses] = useState([]);
+  const { data: addresses, loading, error, request } = useFetch();
 
   useEffect(() => {
     if (user) {

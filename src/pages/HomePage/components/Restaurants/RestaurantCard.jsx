@@ -35,6 +35,7 @@ export default function RestaurantCard({ image, name, cuisines, rating, id }) {
           <p className="text-muted-foreground text-sm">
             {cuisines.slice(0, 4).join(" • ")}
           </p>
+
           <div className="pt-1">
             <span
               className="

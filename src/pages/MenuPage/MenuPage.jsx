@@ -14,6 +14,7 @@ import Category from "./components/Category";
 function MenuPage() {
   const { city, restaurantId } = useParams();
   const navigate = useNavigate();
+
   const { menus, loading: menuLoading } = useMenu(city, restaurantId);
 
   const { restaurants, loadingRestaurants } = useContext(RestaurantContext);
@@ -51,7 +52,10 @@ function MenuPage() {
           {!loadingRestaurants && filteredRestaurant && (
             <RestaurantInfo filteredRestaurant={filteredRestaurant} />
           )}
-
+          {console.log(
+            "🚀 ~ Object.keys(groupByCategories)[0]:",
+            Object.keys(groupByCategories)[0]
+          )}
           <div>
             {!menuLoading && (
               <Accordion

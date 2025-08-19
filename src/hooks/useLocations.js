@@ -1,20 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import useFetch from "./useFetch";
+const API_URL =
+  "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app";
 
 function useLocations() {
-  const [locations, setLocations] = useState([]);
-  const { request, loading, error } = useFetch();
+  // const [locations, setLocations] = useState([]);
+  const { data: locations, request, loading, error } = useFetch({ API_URL });
   useEffect(() => {
     fetchLocations();
   }, []);
   const fetchLocations = async () => {
-    const response = await request({
+    await request({
       url: "/location_restaurant_ids.json?shallow=true",
     });
-    const locationsArr = Object.keys(response);
-    setLocations(locationsArr);
+    // const locationsArr = Object.keys(response);
+    // setLocations(locationsArr);
   };
-  return { locations, loading, error };
+  return { locations: Object.keys(locations), loading, error };
 }
 
 export default useLocations;
