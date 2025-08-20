@@ -17,12 +17,15 @@ function Locations() {
         <h2 className="text-2xl font-semibold mb-6 text-center">
           Choose your city
         </h2>
-        <div className="flex justify-center gap-5">
-          <Carousel className="w-250">
+        <div className="flex justify-center gap-3 sm:gap-5 w-full">
+          <Carousel className="w-full max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl">
             <CarouselContent>
               {locations.map((city) => {
                 return (
-                  <CarouselItem key={city} className="pl-4 basis-1/3">
+                  <CarouselItem
+                    key={city}
+                    className="pl-2 sm:pl-4 basis-3/4 sm:basis-1/2 md:basis-1/3"
+                  >
                     <CityCard city={city} />
                   </CarouselItem>
                 );

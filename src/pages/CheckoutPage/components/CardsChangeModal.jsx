@@ -24,19 +24,21 @@ function CardsChangeModal() {
   } = useContext(CheckoutContext);
   return (
     <Dialog open={showCardsModal} onOpenChange={setShowCardsModal}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Select Another Address</DialogTitle>
+      <DialogContent className="w-full max-w-xs sm:max-w-md md:max-w-lg mx-auto">
+        <DialogHeader className="w-full">
+          <DialogTitle className="w-full text-center">
+            Select Another Address
+          </DialogTitle>
         </DialogHeader>
         {savedCards.length > 0 && (
           <Select onValueChange={onCardSelect}>
-            <SelectTrigger className="w-[400px]">
+            <SelectTrigger className="w-full max-w-xs sm:max-w-md md:max-w-lg truncate">
               <SelectValue
                 placeholder={`${selectedCard.brand},
                 ${selectedCard.expMonth}/${selectedCard.expYear},
                         ${selectedCard.last4},`}
               />
-              <SelectContent>
+              <SelectContent className="w-full max-w-xs sm:max-w-md md:max-w-lg max-h-60 overflow-y-auto">
                 {savedCards.map((card) => {
                   return (
                     <SelectItem key={card.id} value={card}>

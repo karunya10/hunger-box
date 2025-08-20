@@ -39,16 +39,17 @@ function MenuPage() {
 
   return (
     <>
-      <div className="relative flex">
+      <div className=" flex flex-col lg:flex-row relative">
         <Button
-          className=" rounded-lg bg-red-400 hover:bg-red-500 text-white font-semibold my-5 mx-5"
+          className="w-24 sm:w-32 block mx-auto rounded-lg bg-red-400 hover:bg-red-500 text-white font-semibold my-5 px-2 sm:px-4"
           onClick={() => {
             navigate("/");
           }}
         >
           Back
         </Button>
-        <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+        <div className="w-full lg:max-w-3xl mx-auto px-4 py-6 space-y-6 order-2 lg:order-1">
+          <Cart className="mb-6 mx-auto lg:hidden" />
           {!loadingRestaurants && filteredRestaurant && (
             <RestaurantInfo filteredRestaurant={filteredRestaurant} />
           )}
@@ -73,8 +74,9 @@ function MenuPage() {
             )}
           </div>
         </div>
-
-        <Cart />
+        <div className="hidden lg:block order-2 lg:order-2">
+          <Cart />
+        </div>
       </div>
     </>
   );

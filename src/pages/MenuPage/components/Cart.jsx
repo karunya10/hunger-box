@@ -2,13 +2,15 @@ import { useContext } from "react";
 import { CartContext } from "@/context/CartContext";
 import { useNavigate } from "react-router-dom";
 
-function Cart() {
+function Cart({ className = "" }) {
   const { currentCart, totalPrice } = useContext(CartContext);
   const navigate = useNavigate();
 
   return (
-    <div className="sticky top-6 right-6 h-fit my-5">
-      <div className="rounded-xl border p-4 shadow-md w-64">
+    <div
+      className={`lg:mx-0 lg:sticky lg:top-6 lg:right-6 lg:h-fit lg:my-5 ${className}`}
+    >
+      <div className="mx-auto rounded-xl border p-4 shadow-md w-64">
         <div className="flex justify-between items-center mb-3">
           <div className="flex items-center gap-1 text-sm text-red-500 font-semibold bg-red-100 px-2 py-1 rounded-full">
             <span>🛒</span>

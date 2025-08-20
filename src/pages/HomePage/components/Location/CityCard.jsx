@@ -16,12 +16,13 @@ function CityCard({ city }) {
 
   return (
     <div
-      className={`duration-300 cursor-pointer rounded-xl z-0 ${
+      className={`duration-300 cursor-pointer rounded-xl z-0 mx-2 sm:mx-4 my-2 ${
         selectedLocation === city ? "scale-100" : "hover:scale-105"
       }`}
       onClick={() => setSelectedLocation(city)}
+      style={{ minWidth: 0 }}
     >
-      <Card className="relative overflow-hidden w-[300px] h-[200px] rounded-xl cursor-pointer">
+      <Card className="relative overflow-hidden w-full max-w-[220px] sm:max-w-[260px] md:max-w-[300px] h-[140px] sm:h-[180px] md:h-[200px] rounded-xl cursor-pointer">
         <img
           src={images[city]}
           alt={city}
@@ -34,9 +35,9 @@ function CityCard({ city }) {
               : {}
           }
         />
-        <CardContent className="relative z-20 h-full flex flex-col justify-between p-4">
+        <CardContent className="relative z-20 h-full flex flex-col justify-between p-2 sm:p-4">
           <div>
-            <h2 className="text-white text-xl font-bold">{city}</h2>
+            <h2 className="text-white text-lg sm:text-xl font-bold">{city}</h2>
           </div>
         </CardContent>
       </Card>

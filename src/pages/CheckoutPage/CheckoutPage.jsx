@@ -33,13 +33,13 @@ function CheckOutPage() {
 
   return (
     <>
-      <Card className="mx-auto w-1/2 my-10">
+      <Card className="mx-auto w-full max-w-md sm:max-w-lg md:max-w-2xl my-6 sm:my-10 px-2">
         <h2 className="mx-auto text-xl font-bold">Checkout</h2>
         <CheckoutAddress />
         <CheckoutCards />
         <OrderSummary />
         <Button
-          className="mx-auto w-1/2 bg-red-400 hover:bg-red-500 text-white font-semibold py-2 transition"
+          className="block mx-auto w-full sm:w-1/2 bg-red-400 hover:bg-red-500 text-white font-semibold py-2 transition"
           onClick={handlePlaceOrder}
         >
           Place Order

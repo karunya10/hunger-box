@@ -17,7 +17,7 @@ function Restaurants() {
         {!loading && (
           <div className="flex-cols">
             <h2 className="text-center my-10">Restaurants in city</h2>
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {(filteredRestaurants.length == 0
                 ? restaurants
                 : filteredRestaurants

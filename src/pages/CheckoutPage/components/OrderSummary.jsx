@@ -8,9 +8,9 @@ function OrderSummary() {
 
   return (
     <CardContent>
-      <Card className="w-full rounded-xl border p-4 shadow-sm">
+      <Card className="w-full rounded-xl border py-6 shadow-sm">
         <CardContent className="space-y-4">
-          <h2 className="text-lg font-semibold">Order Summary</h2>
+          <p className="mx-auto text-xl font-bold">Order Summary</p>
           <div className="space-y-2">
             {currentCart.length > 0 &&
               aggregateCart.map((item, index) => (

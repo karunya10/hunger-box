@@ -6,7 +6,8 @@ function RestaurantInfo({ filteredRestaurant }) {
     <div className="text-center space-y-4">
       <img
         src={filteredRestaurant.image}
-        className="rounded-xl w-full h-80 object-cover"
+        className="rounded-xl w-full h-48 sm:h-64 md:h-80 object-cover"
+        alt={filteredRestaurant.name}
       />
       <div className="text-3xl font-bold">{filteredRestaurant.name}</div>
       <div className="text-sm text-gray-600">

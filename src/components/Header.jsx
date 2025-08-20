@@ -32,7 +32,7 @@ export default function Header({ onLoginClick }) {
       </div>
 
       <div className=" flex gap-4 justify-center items-center">
-        <Settings  />
+        <Settings />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
@@ -64,7 +64,9 @@ export default function Header({ onLoginClick }) {
             <DropdownMenuItem onClick={() => navigate("/address")}>
               Address Book
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/wallet")}>Wallet</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate("/wallet")}>
+              Wallet
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

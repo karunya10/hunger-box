@@ -20,7 +20,7 @@ export default function RestaurantCard({ image, name, cuisines, rating, id }) {
   return (
     <>
       <Card
-        className="w-full shadow-md hover:shadow-xl transition-shadow py-0 pb-5 cursor-pointer"
+        className="w-full shadow-md hover:shadow-xl transition-shadow py-0 pb-5 cursor-pointer "
         onClick={handleRestaurantCardClick}
       >
         <CardHeader className="p-0">

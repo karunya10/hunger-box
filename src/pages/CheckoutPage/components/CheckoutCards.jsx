@@ -25,7 +25,7 @@ function CheckoutCards() {
               )}
             </div>
             <Button
-              className="bg-red-400 hover:bg-red-500 text-white font-semibold py-2 transition"
+              className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 sm:py-2 px-2 sm:px-4 transition text-xs sm:text-base"
               onClick={cardHandleChange}
             >
               Change

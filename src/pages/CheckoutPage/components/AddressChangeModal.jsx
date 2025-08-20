@@ -25,21 +25,28 @@ function AddressChangeModal() {
   } = useContext(CheckoutContext);
   return (
     <Dialog open={showAddressModal} onOpenChange={setShowAddressModal}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Select Another Address</DialogTitle>
+      <DialogContent className="w-full max-w-xs sm:max-w-md md:max-w-lg mx-auto">
+        <DialogHeader className="w-full">
+          <DialogTitle className="w-full text-center">
+            Select Another Address
+          </DialogTitle>
         </DialogHeader>
         {!loading && (
           <Select onValueChange={onAddressSelect}>
-            <SelectTrigger className="w-[400px]">
+            <SelectTrigger className="w-full max-w-xs sm:max-w-md md:max-w-lg truncate">
               <SelectValue
                 placeholder={`${selectedAddress.street},${selectedAddress.houseNo},${selectedAddress.city},
                         ${selectedAddress.pincode},${selectedAddress.country}`}
+                className="whitespace-normal break-words max-w-full"
               />
-              <SelectContent>
+              <SelectContent className="w-full max-w-xs sm:max-w-md md:max-w-lg max-h-60 overflow-y-auto">
                 {addresses.map((address) => {
                   return (
-                    <SelectItem key={address.id} value={address}>
+                    <SelectItem
+                      key={address.id}
+                      value={address}
+                      className="break-words whitespace-normal w-full"
+                    >
                       {address.street},{address.houseNo},{address.city},
                       {address.pincode},{address.country}
                     </SelectItem>
