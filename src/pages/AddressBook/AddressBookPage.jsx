@@ -5,6 +5,7 @@ import useAddress from "@/hooks/useAddress";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2, Pin } from "lucide-react";
+import { toast } from "sonner";
 
 function AddressBookPage() {
   const navigate = useNavigate();
@@ -54,6 +55,9 @@ function AddressBookPage() {
                     variant="ghost"
                     onClick={() => {
                       deleteAddress(address.id);
+                      toast.success("Address Deleted", {
+                        duration: 3000,
+                      });
                     }}
                   >
                     <Trash2 className="w-4 h-4" />

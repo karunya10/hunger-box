@@ -9,6 +9,11 @@ export function CartProvider({ children }) {
 
   useEffect(() => {
     if (currentRestauratId !== "" && !cart[currentRestauratId]) {
+      console.log(
+        "🚀 ~ CartProvider ~ currentRestauratId:",
+        currentRestauratId
+      );
+
       setCart({ ...cart, [currentRestauratId]: [] });
     }
   }, [currentRestauratId]);

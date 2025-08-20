@@ -39,9 +39,9 @@ function MenuPage() {
 
   return (
     <>
-      <div className=" flex flex-col lg:flex-row relative">
+      <div className=" flex flex-col lg:flex-row lg:justify-between relative">
         <Button
-          className="w-24 sm:w-32 block mx-auto rounded-lg bg-red-400 hover:bg-red-500 text-white font-semibold my-5 px-2 sm:px-4"
+          className="lg:ml-5 rounded-lg bg-red-400 hover:bg-red-500 text-white font-semibold my-5 px-4 sm:w-32 sm:mx-auto"
           onClick={() => {
             navigate("/");
           }}
@@ -74,7 +74,7 @@ function MenuPage() {
             )}
           </div>
         </div>
-        <div className="hidden lg:block order-2 lg:order-2">
+        <div className="hidden lg:block order-2 lg:order-2 lg:mr-5">
           <Cart />
         </div>
       </div>

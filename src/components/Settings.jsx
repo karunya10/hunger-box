@@ -9,8 +9,8 @@ function Settings() {
   const { darkMode, setDarkMode } = useContext(SettingsContext);
 
   useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
-    document.body.classList.toggle("light-mode", !darkMode);
+    document.body.classList.toggle("dark", darkMode);
+    document.body.classList.toggle("light", !darkMode);
   }, [darkMode]);
 
   return (

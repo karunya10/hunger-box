@@ -12,7 +12,7 @@ export default function CardsBook() {
   const [user] = useAuthState(auth);
   const { startCardSave, clientSecret, saveCard } = useCards(user);
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
 
   useEffect(() => {
     startCardSave();
@@ -31,15 +31,14 @@ export default function CardsBook() {
           saveCard={saveCard}
           setSaving={setSaving}
           saving={saving}
-          setMessage={setMessage}
         />
       </Elements>
 
-      {message && (
+      {/* {message && (
         <p className="text-center mt-4 text-green-600 font-semibold">
           {message}
         </p>
-      )}
+      )} */}
     </div>
   );
 }

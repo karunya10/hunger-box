@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { addressSchema } from "@/schemas/schemas";
 import useAddress from "@/hooks/useAddress";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function AddressFormPage() {
   const { addAddress } = useAddress();
@@ -21,8 +22,12 @@ export default function AddressFormPage() {
     },
   });
 
-  const onSubmit = (data) => {
-    addAddress(data);
+  const onSubmit = async (data) => {
+    await addAddress(data);
+    toast.success("Address Save Successful", {
+      duration: 3000,
+    });
+    navigate(-1);
   };
 
   const handleReset = () => {

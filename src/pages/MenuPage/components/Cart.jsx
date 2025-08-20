@@ -23,8 +23,15 @@ function Cart({ className = "" }) {
           <span className="font-bold text-lg">₹ {totalPrice().toFixed(2)}</span>
         </div>
         <button
-          className="w-full rounded-lg bg-red-400 hover:bg-red-500 text-white font-semibold py-2 transition"
+          className={`w-full rounded-lg font-semibold py-2 transition 
+              ${
+                currentCart.length === 0
+                  ? "bg-gray-300 text-gray-400 cursor-not-allowed"
+                  : "bg-red-400 hover:bg-red-500 text-white cursor-pointer"
+              }
+            `}
           onClick={() => navigate("/checkout")}
+          disabled={currentCart.length === 0}
         >
           Checkout
         </button>

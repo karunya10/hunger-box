@@ -11,12 +11,29 @@ import { signOutUser } from "@/config/firebase";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import Settings from "./Settings";
+import { toast } from "sonner";
 
 export default function Header({ onLoginClick }) {
   const [user] = useAuthState(auth);
   const avatarUrl = user ? user.photoURL : "";
 
   const navigate = useNavigate();
+
+  const addressesOnClick = () => {
+    if (user !== null) {
+      navigate("/address");
+    } else {
+      toast.error("Sign-in to view Addresses", { duration: 3000 });
+    }
+  };
+
+  const walletOnClick = () => {
+    if (user !== null) {
+      navigate("/wallet");
+    } else {
+      toast.error("Sign-in to view Wallet", { duration: 3000 });
+    }
+  };
 
   return (
     <header
@@ -61,12 +78,10 @@ export default function Header({ onLoginClick }) {
               </DropdownMenuItem>
             )}
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => navigate("/address")}>
+            <DropdownMenuItem onClick={addressesOnClick}>
               Address Book
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/wallet")}>
-              Wallet
-            </DropdownMenuItem>
+            <DropdownMenuItem onClick={walletOnClick}>Wallet</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

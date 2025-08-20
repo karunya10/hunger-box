@@ -5,6 +5,7 @@ import { addressSchema } from "@/schemas/schemas";
 import useAddress from "@/hooks/useAddress";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function EditAddressFormPage() {
   const { editAddress, addresses } = useAddress();
@@ -25,9 +26,11 @@ export default function EditAddressFormPage() {
     defaultValues: { ...editingAddress },
   });
 
-  const onSubmit = (data) => {
-    console.log("✅ Valid data:", data);
-    editAddress(data);
+  const onSubmit = async (data) => {
+    await editAddress(data);
+    toast.success("Edit Address Successful", {
+      duration: 3000,
+    });
     navigate(-1);
   };
 

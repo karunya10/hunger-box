@@ -6,12 +6,12 @@
   font-family: "InterVariable", sans-serif;
 }
 
-body.light-mode {
+body.light {
   background: f9fafb;
   color: #111827;
 }
 
-body.dark-mode {
+body.dark {
   background: #18181b;
   color: #f3f4f6;
 }

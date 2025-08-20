@@ -2,15 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Pin } from "lucide-react";
+import { Pin, Trash2 } from "lucide-react";
 import { useCards } from "@/hooks/useCards";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/config/firebase";
 
+import { toast } from "sonner";
+
 function CardsListPage() {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
-  const { savedCards } = useCards(user);
+  const { savedCards, deleteCard } = useCards(user);
+
   return (
     <>
       <div className="max-w-2xl mx-auto mt-10 space-y-4">
@@ -45,6 +48,17 @@ function CardsListPage() {
                 </div>
 
                 <div className="flex items-center gap-3"></div>
+                <Button
+                  variant="ghost"
+                  onClick={() => {
+                    deleteCard(card.id);
+                    toast.success("Address Deleted", {
+                      duration: 3000,
+                    });
+                  }}
+                >
+                  <Trash2 className="w-4 h-4" />
+                </Button>
               </Card>
             );
           })}

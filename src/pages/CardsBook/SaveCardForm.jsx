@@ -3,10 +3,11 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { toast } from "sonner";
 
 import { useNavigate } from "react-router-dom";
 
-function SaveCardForm({ saveCard, setSaving, saving, setMessage }) {
+function SaveCardForm({ saveCard, setSaving, saving }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -19,10 +20,12 @@ function SaveCardForm({ saveCard, setSaving, saving, setMessage }) {
     setSaving(false);
 
     if (success) {
-      setMessage("Card saved successfully 🎉");
+      toast.success("Card Save Successful", {
+        duration: 3000,
+      });
       navigate(-1);
     } else {
-      setMessage("Failed to save card 😢");
+      toast.error("Failed to save card 😢");
       navigate(-1);
     }
   };

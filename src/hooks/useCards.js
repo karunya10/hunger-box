@@ -67,7 +67,22 @@ export function useCards(user) {
     return true;
   }
 
-  // 3. Fetch saved cards from Firebase DB (REST)
+  // 3. Delete card
+  async function deleteCard(cardId) {
+    await fetch("http://localhost:3001/api/delete-card", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        uid,
+        paymentMethodId: cardId,
+        firebaseDbUrl:
+          "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app",
+      }),
+    });
+    fetchCards();
+  }
+
+  // 4. Fetch saved cards from Firebase DB (REST)
   async function fetchCards() {
     const res = await fetch(
       `https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app/users/${uid}/stripe/cards.json`
@@ -80,7 +95,7 @@ export function useCards(user) {
     setSavedCards(cards);
   }
 
-  // 4. Charge selected card
+  // 5. Charge selected card
   async function payWithCard(paymentMethodId, amount) {
     const res = await fetch("http://localhost:3001/api/pay-with-saved-card", {
       method: "POST",
@@ -102,6 +117,7 @@ export function useCards(user) {
     savedCards,
     fetchCards,
     payWithCard,
+    deleteCard,
     cId,
   };
 }
