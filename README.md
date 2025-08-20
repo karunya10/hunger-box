@@ -1,5 +1,11 @@
 # HungerBox
 
+Live Demo: [https://hunger-box-liard.vercel.app/](https://hunger-box-liard.vercel.app/)
+
+This client app interacts with a payment backend (for card payments and Stripe integration), which is maintained in a separate repository: [HungerBoxPayment](https://github.com/karunya10/HungerBoxPayment)
+
+![HungerBox Demo](./hungerbox-demo.gif)
+
 HungerBox is a modern food ordering web application built with React and Vite. It allows users to browse restaurants, view menus, manage their cart, and place orders. The app features address management, location-based restaurant filtering, and a clean, responsive UI.
 
 ## Features
