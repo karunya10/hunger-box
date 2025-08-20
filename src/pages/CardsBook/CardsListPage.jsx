@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2, Pin } from "lucide-react";
+import { Pin } from "lucide-react";
 import { useCards } from "@/hooks/useCards";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/config/firebase";
@@ -44,19 +44,7 @@ function CardsListPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <Button
-                    variant="ghost"
-                    // onClick={() => {
-                    //   navigate(`/wallet/edit/${card.id}`);
-                    // }}
-                  >
-                    <Pencil className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost">
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
+                <div className="flex items-center gap-3"></div>
               </Card>
             );
           })}

@@ -1,25 +1,42 @@
 import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 
 loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 export function useCards(user) {
   const [clientSecret, setClientSecret] = useState("");
-  console.log("🚀 ~ useCards ~ clientSecret:", clientSecret);
+  const [cId, setcId] = useState("");
+
   const [savedCards, setSavedCards] = useState([]);
-  console.log("🚀 ~ useCards ~ savedCards:", savedCards);
+
   const uid = user.uid;
+
+  useEffect(() => {
+    const fetchStripeId = async () => {
+      const res = await fetch(
+        `https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app/users/${uid}/stripe/user.json`
+      );
+      const { stripeId } = await res.json();
+      stripeId && setcId(stripeId);
+    };
+    fetchStripeId();
+  }, []);
 
   // 1. Call function to create SetupIntent
   async function startCardSave() {
     const res = await fetch("http://localhost:3001/api/create-setup-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ uid, email: user.email }),
+      body: JSON.stringify({
+        uid,
+        email: user.email,
+        firebaseDbUrl:
+          "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app",
+      }),
     });
-    const { clientSecret } = await res.json();
+    const { clientSecret, stripeId } = await res.json();
     setClientSecret(clientSecret);
+    cId.length == 0 && setcId(stripeId);
   }
 
   // 2. Confirm card from frontend
@@ -27,7 +44,7 @@ export function useCards(user) {
     const { setupIntent, error } = await stripe.confirmSetup({
       elements,
       confirmParams: {
-        return_url: window.location.origin + "/cards",
+        return_url: window.location.origin + "/wallet",
       },
       redirect: "if_required",
     });
@@ -68,7 +85,7 @@ export function useCards(user) {
     const res = await fetch("http://localhost:3001/api/pay-with-saved-card", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ uid, paymentMethodId, amount }),
+      body: JSON.stringify({ customerId: cId, paymentMethodId, amount }),
     });
     const result = await res.json();
     return result;
@@ -85,5 +102,6 @@ export function useCards(user) {
     savedCards,
     fetchCards,
     payWithCard,
+    cId,
   };
 }

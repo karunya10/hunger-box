@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { CheckoutContext } from "@/context/CheckoutContext";
 function CheckoutAddress() {
-  const { loading, selectedAddress, handleChange } = useContext(CheckoutContext);
+  const { loading, selectedAddress, addressHandleChange } =
+    useContext(CheckoutContext);
   return (
     <CardContent>
       <Card>
@@ -25,7 +26,7 @@ function CheckoutAddress() {
             </div>
             <Button
               className="bg-red-400 hover:bg-red-500 text-white font-semibold py-2 transition"
-              onClick={handleChange}
+              onClick={addressHandleChange}
             >
               Change
             </Button>

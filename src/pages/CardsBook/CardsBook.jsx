@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
-import {
-  Elements,
-  PaymentElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useCards } from "@/hooks/useCards";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/config/firebase";
+import SaveCardForm from "./SaveCardForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
@@ -45,36 +41,5 @@ export default function CardsBook() {
         </p>
       )}
     </div>
-  );
-}
-
-function SaveCardForm({ saveCard, setSaving, saving, setMessage }) {
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSaving(true);
-    const success = await saveCard(stripe, elements);
-    setSaving(false);
-
-    if (success) {
-      setMessage("Card saved successfully 🎉");
-    } else {
-      setMessage("Failed to save card 😢");
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <PaymentElement />
-      <button
-        type="submit"
-        disabled={!stripe || !elements || saving}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded"
-      >
-        {saving ? "Saving..." : "Save Card"}
-      </button>
-    </form>
   );
 }
