@@ -8,7 +8,7 @@ import LoginModal from "./components/LoginModal";
 import { useState } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { SettingsProvider } from "./context/SettingsContext";
-import { LocationsProvider } from "./context/locationContext";
+import { LocationsProvider } from "./context/LocationContext";
 import { RestaurantProvider } from "./context/RestaurantContext";
 import { CartProvider } from "./context/CartContext";
 import { CheckoutProvider } from "./context/CheckoutContext";

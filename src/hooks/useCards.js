@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 loadStripe(import.meta.env.VITE_STRIPE_PK);
 
-const PAYMENT_BACKEND = import.meta.env.PAYMENT_BACKEND;
+const PAYMENT_BACKEND = import.meta.env.VITE_PAYMENT_BACKEND;
 const DATABASE_URL = import.meta.env.VITE_DATABASE_URL;
 
 export function useCards(user) {
@@ -16,9 +16,7 @@ export function useCards(user) {
 
   useEffect(() => {
     const fetchStripeId = async () => {
-      const res = await fetch(
-        `https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app/users/${uid}/stripe/user.json`
-      );
+      const res = await fetch(`${DATABASE_URL}/users/${uid}/stripe/user.json`);
       const { stripeId } = await res.json();
       stripeId && setcId(stripeId);
     };
