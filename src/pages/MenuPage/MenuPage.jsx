@@ -17,6 +17,8 @@ function MenuPage() {
 
   const { menus, loading: menuLoading } = useMenu(city, restaurantId);
 
+  //todo change naming
+  
   const { restaurants, loadingRestaurants } = useContext(RestaurantContext);
 
   const { setCurrentRestaurantId } = useContext(CartContext);

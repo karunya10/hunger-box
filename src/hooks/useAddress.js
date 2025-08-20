@@ -3,8 +3,7 @@ import useFetch from "./useFetch";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase";
 
-const API_URL =
-  "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app";
+const API_URL = import.meta.env.VITE_DATABASE_URL;
 
 export default function useAddress() {
   const [user] = useAuthState(auth);

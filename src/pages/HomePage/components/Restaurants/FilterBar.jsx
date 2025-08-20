@@ -18,6 +18,14 @@ function FilterBar() {
   });
 
   useEffect(() => {
+    if (
+      filters.search === "" &&
+      filters.rating === null &&
+      filters.isVeg === null
+    ) {
+      setFilteredRestaurants(restaurants);
+      return;
+    }
     const filteredRestaurants = restaurants.filter((restaurant) => {
       const searchMatch =
         filters.search === "" ||
@@ -25,12 +33,12 @@ function FilterBar() {
       const ratingMatch =
         filters.rating === null || restaurant.rating >= filters.rating;
       const isVegMatch =
-        filters.isVeg === null || restaurant.isVeg === filters.isVeg;
+        filters.isVeg === null || restaurant.isVeg == filters.isVeg;
 
       return searchMatch && ratingMatch && isVegMatch;
     });
     setFilteredRestaurants(filteredRestaurants);
-  }, [filters]);
+  }, [filters, restaurants]);
 
   useEffect(() => {
     setFilters({

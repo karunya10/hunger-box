@@ -8,7 +8,7 @@ function Item({ menu }) {
     setCart,
     cartSummary,
     aggregateCart,
-    currentRestauratId,
+    currentRestaurantId,
     currentCart,
   } = useContext(CartContext);
 
@@ -20,9 +20,9 @@ function Item({ menu }) {
       setCart((prev) => {
         return {
           ...prev,
-          [currentRestauratId]: [
-            ...prev[currentRestauratId].slice(0, index),
-            ...prev[currentRestauratId].slice(index + 1),
+          [currentRestaurantId]: [
+            ...prev[currentRestaurantId].slice(0, index),
+            ...prev[currentRestaurantId].slice(index + 1),
           ],
         };
       });
@@ -40,7 +40,7 @@ function Item({ menu }) {
     setCart((prev) => {
       return {
         ...prev,
-        [currentRestauratId]: [...prev[currentRestauratId], menu],
+        [currentRestaurantId]: [...prev[currentRestaurantId], menu],
       };
     });
   };

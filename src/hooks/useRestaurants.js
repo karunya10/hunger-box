@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useFetch from "./useFetch";
-const API_URL =
-  "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app";
+const API_URL =import.meta.env.VITE_DATABASE_URL;
+
 
 function useRestaurants(city) {
   const [restaurants, setRestaurants] = useState([]);

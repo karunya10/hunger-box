@@ -73,7 +73,12 @@ export default function Header({ onLoginClick }) {
                 Sign-in
               </DropdownMenuItem>
             ) : (
-              <DropdownMenuItem onClick={signOutUser}>
+              <DropdownMenuItem
+                onClick={() => {
+                  signOutUser();
+                  navigate("/");
+                }}
+              >
                 Sign-out
               </DropdownMenuItem>
             )}

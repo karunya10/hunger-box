@@ -18,6 +18,9 @@ export default function AddressFormPage() {
     defaultValues: {
       street: "",
       houseNo: "",
+      city: "",
+      pincode: "",
+      country: "",
       phone: "",
     },
   });
