@@ -27,7 +27,7 @@ function CardsChangeModal() {
       <DialogContent className="w-full max-w-xs sm:max-w-md md:max-w-lg mx-auto">
         <DialogHeader className="w-full">
           <DialogTitle className="w-full text-center">
-            Select Another Address
+            Select Another Card
           </DialogTitle>
         </DialogHeader>
         {savedCards.length > 0 && (
