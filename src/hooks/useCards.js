@@ -3,6 +3,9 @@ import { loadStripe } from "@stripe/stripe-js";
 
 loadStripe(import.meta.env.VITE_STRIPE_PK);
 
+const PAYMENT_BACKEND = import.meta.env.PAYMENT_BACKEND;
+const DATABASE_URL = import.meta.env.VITE_DATABASE_URL;
+
 export function useCards(user) {
   const [clientSecret, setClientSecret] = useState("");
   const [cId, setcId] = useState("");
@@ -24,14 +27,13 @@ export function useCards(user) {
 
   // 1. Call function to create SetupIntent
   async function startCardSave() {
-    const res = await fetch("http://localhost:3001/api/create-setup-intent", {
+    const res = await fetch(`${PAYMENT_BACKEND}/api/create-setup-intent`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         uid,
         email: user.email,
-        firebaseDbUrl:
-          "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app",
+        firebaseDbUrl: `${DATABASE_URL}`,
       }),
     });
     const { clientSecret, stripeId } = await res.json();
@@ -53,14 +55,13 @@ export function useCards(user) {
       return false;
     }
 
-    await fetch("http://localhost:3001/api/store-payment-method", {
+    await fetch(`${PAYMENT_BACKEND}/api/store-payment-method`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         uid,
         paymentMethodId: setupIntent.payment_method,
-        firebaseDbUrl:
-          "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app",
+        firebaseDbUrl: `${DATABASE_URL}`,
       }),
     });
     fetchCards();
@@ -69,14 +70,13 @@ export function useCards(user) {
 
   // 3. Delete card
   async function deleteCard(cardId) {
-    await fetch("http://localhost:3001/api/delete-card", {
+    await fetch(`${PAYMENT_BACKEND}/api/delete-card`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         uid,
         paymentMethodId: cardId,
-        firebaseDbUrl:
-          "https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app",
+        firebaseDbUrl: `${DATABASE_URL}`,
       }),
     });
     fetchCards();
@@ -84,9 +84,7 @@ export function useCards(user) {
 
   // 4. Fetch saved cards from Firebase DB (REST)
   async function fetchCards() {
-    const res = await fetch(
-      `https://food-delivery-da806-default-rtdb.europe-west1.firebasedatabase.app/users/${uid}/stripe/cards.json`
-    );
+    const res = await fetch(`${DATABASE_URL}/users/${uid}/stripe/cards.json`);
     const data = await res.json();
     const cards = Object.entries(data || {}).map(([id, info]) => ({
       id,
@@ -97,7 +95,7 @@ export function useCards(user) {
 
   // 5. Charge selected card
   async function payWithCard(paymentMethodId, amount) {
-    const res = await fetch("http://localhost:3001/api/pay-with-saved-card", {
+    const res = await fetch(`${PAYMENT_BACKEND}/api/pay-with-saved-card`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ customerId: cId, paymentMethodId, amount }),
