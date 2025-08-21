@@ -17,7 +17,7 @@ import { CheckoutContext } from "@/context/CheckoutContext";
 function CheckOutPage() {
   const { totalPrice, setCart, setCurrentRestaurantId } =
     useContext(CartContext);
-  const { selectedCard } = useContext(CheckoutContext);
+  const { selectedCard, addresses } = useContext(CheckoutContext);
 
   const [user] = useAuthState(auth);
   const { payWithCard, savedCards } = useCards(user);
@@ -52,7 +52,7 @@ function CheckOutPage() {
         <Button
           className="block mx-auto w-full sm:w-1/2 bg-red-400 hover:bg-red-500 text-white font-semibold py-2 transition"
           onClick={handlePlaceOrder}
-          disabled={savedCards.length === 0}
+          disabled={savedCards.length === 0 || addresses.length === 0}
         >
           Place Order
         </Button>

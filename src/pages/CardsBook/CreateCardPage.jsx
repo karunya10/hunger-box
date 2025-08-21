@@ -8,11 +8,11 @@ import SaveCardForm from "./SaveCardForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
-export default function CardsBook() {
+export default function CreateCardPage() {
   const [user] = useAuthState(auth);
   const { startCardSave, clientSecret, saveCard } = useCards(user);
   const [saving, setSaving] = useState(false);
-  // const [message, setMessage] = useState("");
+
 
   useEffect(() => {
     startCardSave();

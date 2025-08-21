@@ -23,6 +23,10 @@ export function useCards(user) {
     fetchStripeId();
   }, []);
 
+  useEffect(() => {
+    fetchCards();
+  }, []);
+
   // 1. Call function to create SetupIntent
   async function startCardSave() {
     const res = await fetch(`${PAYMENT_BACKEND}/api/create-setup-intent`, {
@@ -84,10 +88,13 @@ export function useCards(user) {
   async function fetchCards() {
     const res = await fetch(`${DATABASE_URL}/users/${uid}/stripe/cards.json`);
     const data = await res.json();
-    const cards = Object.entries(data || {}).map(([id, info]) => ({
-      id,
-      ...info,
-    }));
+    const cards = Object.entries(data || {}).map((entry) => {
+      const [id, info] = entry;
+      return {
+        id,
+        ...info,
+      };
+    });
     setSavedCards(cards);
   }
 
@@ -101,10 +108,6 @@ export function useCards(user) {
     const result = await res.json();
     return result;
   }
-
-  useEffect(() => {
-    fetchCards();
-  }, []);
 
   return {
     startCardSave,

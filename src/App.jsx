@@ -15,7 +15,7 @@ import { CheckoutProvider } from "./context/CheckoutContext";
 import AddressFormPage from "./pages/AddressBook/AddressFormPage";
 import EditAddressFormPage from "./pages/AddressBook/EditAddressFormPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
-import CardsBook from "./pages/CardsBook/CardsBook";
+import CreateCardPage from "./pages/CardsBook/CreateCardPage";
 import CardsListPage from "./pages/CardsBook/CardsListPage";
 
 function App() {
@@ -58,7 +58,7 @@ function App() {
                   element={<OrderConfirmationPage />}
                 />
                 <Route path="/wallet" element={<CardsListPage />} />
-                <Route path="/wallet/new" element={<CardsBook />} />
+                <Route path="/wallet/new" element={<CreateCardPage />} />
               </Routes>
             </CartProvider>
           </RestaurantProvider>

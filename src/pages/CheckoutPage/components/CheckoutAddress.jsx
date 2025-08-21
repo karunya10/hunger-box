@@ -2,7 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { CheckoutContext } from "@/context/CheckoutContext";
+import { useNavigate } from "react-router-dom";
 function CheckoutAddress() {
+  const navigate = useNavigate();
   const { loading, selectedAddress, addressHandleChange } =
     useContext(CheckoutContext);
   return (
@@ -27,12 +29,20 @@ function CheckoutAddress() {
                   <div className="my-3 text-red-500">No address available</div>
                 ))}
             </div>
-            <Button
-              className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 sm:py-2 px-2 sm:px-4 transition text-xs sm:text-base"
-              onClick={addressHandleChange}
-            >
-              Change
-            </Button>
+            <div className="flex flex-col gap-3 items-end">
+              <Button
+                className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 sm:py-2 px-2 sm:px-4 transition text-xs sm:text-base w-32"
+                onClick={addressHandleChange}
+              >
+                Change
+              </Button>
+              <Button
+                className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 sm:py-2 px-2 sm:px-4 transition text-xs sm:text-base w-32"
+                onClick={() => navigate("/address/new")}
+              >
+                Add Address
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
