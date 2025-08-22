@@ -5,7 +5,9 @@ export const CartContext = createContext(null);
 export function CartProvider({ children }) {
   const [cart, setCart] = useState({});
   const [currentRestaurantId, setCurrentRestaurantId] = useState("");
-  const currentCart = cart[currentRestaurantId] ? cart[currentRestaurantId] : [];
+  const currentCart = cart[currentRestaurantId]
+    ? cart[currentRestaurantId]
+    : [];
 
   useEffect(() => {
     if (currentRestaurantId !== "" && !cart[currentRestaurantId]) {
@@ -34,11 +36,12 @@ export function CartProvider({ children }) {
       }
       acc[item.id].count += 1;
       acc[item.id].totalPrice += item.price;
+
       return acc;
     }, {});
 
   const aggregateCart = currentCart && Object.values(cartSummary);
-  
+
   const value = {
     cart,
     setCart,
